@@ -1,6 +1,6 @@
 {
  "title": "Рязань и окрестности",
- "dates": "Пт 23 октября 20:05 из Петербурга · обратно утром в сб 31 октября",
+ "dates": "Пт 23.10 20:05 из Петербурга в Рязань · обратно из Владимира 30.10 17:49 → СПб 31.10 06:54",
  "note": "<b>Черновик для обсуждения.</b> План по дням ещё не утверждён. Цены отмечены как «проверено» или «примерно». В конце октября часть музеев работает по сокращённому графику, а погода около +2…+8 °C, возможен дождь. Расписание автобусов проверяйте накануне.",
  "days": [
   {
@@ -99,15 +99,17 @@
    "date": "2026-10-29",
    "dt": "Чт 29.10",
    "img": "bison",
-   "title": "🦬 Окский заповедник и Старая Рязань",
+   "title": "🦬 Окский заповедник и Старая Рязань, ночью во Владимир",
    "chips": [
     "🚕 такси / 🚌 автобус",
-    "!экскурсии 10:30 · 12:30 · 14:30 · 16:00"
+    "!экскурсии 10:30 · 12:30 · 14:30 · 16:00",
+    "🚆 037С 22:49 → Владимир 06:05"
    ],
    "items": [
     "Окский заповедник (Брыкин Бор): визит-центр и музей природы ежедневно 10:00–16:00, зубровый питомник только с экскурсоводом; для групп меньше 10 человек запись не нужна (<a href=\"http://oksky-reserve.ru/visit/information/\">oksky-reserve.ru</a>).",
     "По пути Спасск-Рязанский и городище Старой Рязани (под открытым небом).",
-    "Вечером в четверг с 18:00 до 20:00 в историческом музее на Соборной, 22 открыта новая экспозиция."
+    "Вечером выезд из гостиницы, ужин в Рязани.",
+    "<b>22:49 поезд 037С Сириус — Нижний Новгород</b> из Рязани → Владимир 06:05 (пт), купе от ~3 813 ₽ (Яндекс Расписания, 17.10; время ✓, цена ориентир). Билет пока не куплен."
    ],
    "diary": ""
   },
@@ -115,17 +117,21 @@
    "n": 7,
    "date": "2026-10-30",
    "dt": "Пт 30.10",
-   "img": "kremlin",
-   "title": "🚆 Спокойный день или Коломна по пути",
+   "img": "vladimir",
+   "title": "🏛️ Владимир",
    "chips": [
-    "🚆 поезд до Москвы",
-    "!вечером ночной поезд"
+    "!06:05 прибытие",
+    "🚶 пешком по центру",
+    "!Дмитриевский собор пт 10:00–18:00",
+    "!17:49 поезд 131Г"
    ],
    "items": [
-    "Вариант А: спокойное утро в Рязани (музеи открыты), обед, вечером поезд в Москву.",
-    "Вариант Б: днём поезд до Коломны (кремль, пастила, Музей коломенской пастилы), вечером из Коломны в Москву. Расписание из Коломны не проверено.",
-    "Скопин (музей керамики) запасной вариант на любой день, кроме понедельника.",
-    "Ночным поездом в Петербург (см. «Возвращение»)."
+    "<b>Основной вариант:</b> ночным 037С приезжаем во Владимир в 06:05 (время проверено по Яндекс Расписаниям). Завтрак, вещи в камеру хранения на вокзале (наличие проверить).",
+    "Дмитриевский собор: в пятницу 10:00–18:00, касса за 30 мин до закрытия (проверено, <a href=\"https://vladmuseum.ru/ru/posetitelyam/times/\">vladmuseum.ru</a>). Успенский собор: примерно 10:00–17:00, действующий храм.",
+    "Золотые ворота: экспозиция закрыта на реставрацию (по сайту музея), смотрим снаружи. Смотровая площадка у Успенского собора, улица Георгиевская.",
+    "По желанию: Боголюбово и Покров на Нерли (около 15 мин на автобусе или такси до Боголюбова, затем около 1,5 км пешком по лугу; примерно), или Суздаль (около 45 мин на автобусе; примерно, тогда вернуться к 17:00).",
+    "<b>17:49 поезд 131Г</b> с вокзала Владимир-Пассажирский (ул. Вокзальная, 2) → Санкт-Петербург-Ладожский 06:54.",
+    "<b>Запасной вариант:</b> утром в пятницу из Рязани в Москву (например, 065Э 06:42 → Казанский 10:06 или 135М 08:10 → 11:25), затем «Ласточка» 703Х Москва 13:45 → Владимир 15:32, сидячее от ~2 493 ₽ (Яндекс Расписания, 17.10; время ✓, цена ориентир, вокзал отправления в Москве уточнить). Коломна теперь не по пути: только с заездом через Москву."
    ],
    "diary": ""
   }
@@ -192,22 +198,40 @@
    "lon": 40.0806
   },
   {
-   "day": 7,
-   "name": "Коломна (вариант)",
-   "lat": 55.1028,
-   "lon": 38.7531
-  },
-  {
-   "day": 7,
-   "name": "Скопин (запасной)",
-   "lat": 53.8236,
-   "lon": 39.5503
-  },
-  {
    "day": 1,
    "name": "Кирицы, усадьба фон Дервиза (по записи 24.10)",
    "lat": 54.3797,
    "lon": 40.2836
+  },
+  {
+   "day": 7,
+   "name": "Владимир, Золотые ворота",
+   "lat": 56.127,
+   "lon": 40.397
+  },
+  {
+   "day": 7,
+   "name": "Успенский собор",
+   "lat": 56.1285,
+   "lon": 40.4095
+  },
+  {
+   "day": 7,
+   "name": "Дмитриевский собор",
+   "lat": 56.1297,
+   "lon": 40.4137
+  },
+  {
+   "day": 7,
+   "name": "Владимир-Пассажирский (поезд 131Г)",
+   "lat": 56.1281,
+   "lon": 40.4224
+  },
+  {
+   "day": 7,
+   "name": "Покров на Нерли (по желанию)",
+   "lat": 56.196,
+   "lon": 40.5614
   }
  ],
  "colors": {
@@ -226,20 +250,20 @@
   "4": "Касимов",
   "5": "Спас-Клепики",
   "6": "Окский / Старая Рязань",
-  "7": "Коломна / Скопин"
+  "7": "Владимир"
  },
- "ticket_html": "<div class=\"tickets rv\">\n<div class=\"pass\"><div class=\"main\"><span class=\"badge\">Куплено</span><div class=\"lbl\" style=\"margin-top:10px\">Фирменный поезд «Северная Пальмира» · двухэтажный</div>\n<div class=\"route\"><div><div class=\"t\">20:05</div><div class=\"lbl\">Пт 23.10</div></div><div class=\"ln\"></div><div style=\"text-align:right\"><div class=\"t\">06:41</div><div class=\"lbl\">Сб 24.10</div></div></div>\n<div style=\"display:flex;justify-content:space-between;font-size:14px\"><span>Санкт-Петербург<br><small style=\"color:var(--mut)\">Московский вокзал</small></span><span style=\"text-align:right\">Рязань-2</span></div>\n<p style=\"font-size:13px;margin:12px 0 0\"><a href=\"https://rasp.yandex.ru/thread/R_035A_112?departure_from=2026-10-23+20%3A05%3A00&station_from=9602494&station_to=9600746&to_city=1\">Расписание на Яндекс Расписаниях →</a></p></div>\n<div class=\"stub\"><div><div class=\"lbl\" style=\"color:#d8d0bd\">Поезд</div><div class=\"num\">035А</div></div><div><div class=\"lbl\" style=\"color:#d8d0bd\">В пути</div><b>10 ч 36 мин</b></div></div></div>\n<div class=\"pend\"><span class=\"badge b-o\">Не куплено</span><h3 style=\"margin:10px 0 4px;color:var(--g)\">Обратный билет</h3><div class=\"route\" style=\"margin:6px 0\"><div class=\"t\" style=\"font-size:30px\">30→31.10, утро</div></div><p style=\"font-size:14px;color:var(--mut);margin:0\">Варианты ниже, в разделе <a href=\"#return\">«Возвращение»</a></p></div>\n</div>",
- "returns_html": "<div class=\"rc rec rv\"><span class=\"badge b-o\">★ Рекомендуем</span><h3>Через Москву</h3><div class=\"tm\">30.10 вечер → 31.10 07:00–08:00</div><div class=\"pr\">поезд Рязань → Москва + ночной</div><p>Из Рязани: 029Й 18:02→20:50, 103Ж 18:12→21:00 (✓ время, Яндекс; цены не получены). Из Москвы: 020У 22:50→07:00 (купе от ~7 888 ₽), 054А 23:00→08:00 (купе от ~8 203 ₽), 120В 21:28→07:19 (стыковка впритык). Цены по Яндекс Расписаниям 17.10, ориентир; прибытие в Москву на Казанский, отправление с Ленинградского, это через площадь.</p></div>\n<div class=\"rc rv\"><span class=\"badge\">Прямой</span> <span class=\"badge b-a\">✓ проверено</span><h3>007С Симферополь — Санкт-Петербург</h3><div class=\"tm\">31.10 00:37 Рязань-2 → 31.10 09:53</div><div class=\"pr\">купе от 7 756 ₽</div><p>Без пересадок, без ночного переезда через Москву. Плацкарт на эту дату в выдаче не виден.</p></div>\n<div class=\"rc rv\"><span class=\"badge\">Прямой</span> <span class=\"badge b-a\">✓ проверено</span><h3>035С «Северная Пальмира» Адлер — Санкт-Петербург</h3><div class=\"tm\">31.10 00:29 Рязань-2 → 31.10 10:40</div><div class=\"pr\">купе от 6 031 ₽</div><p>Тот же двухэтажный фирменный, что и туда. Самый дешёвый прямой, приходит позже.</p></div>\n<div class=\"rc rv\"><span class=\"badge b-gr\">Не проверено</span><h3>Через Коломну</h3><div class=\"tm\">30.10 вечер</div><div class=\"pr\">—</div><p>Коломна → Москва электричкой или «Ласточкой», затем ночной поезд из Москвы. Расписание и цены не проверены.</p></div>\n<div class=\"rc no rv\"><span class=\"badge b-gr\">Не подходит</span><h3>105У Оренбург — Санкт-Петербург</h3><div class=\"tm\">30.10</div><div class=\"pr\">—</div><p>На 30.10 в выдаче Яндекс Расписаний этого поезда нет.</p></div>\n",
+ "ticket_html": "<div style=\"display:grid;gap:22px\"><div class=\"pass rv\"><div class=\"main\"><span class=\"badge\">Туда · куплено</span><div class=\"lbl\" style=\"margin-top:10px\">Фирменный «Северная Пальмира» · двухэтажный</div>\n<div class=\"route\"><div><div class=\"t\">20:05</div><div class=\"lbl\">Пт 23.10</div></div><div class=\"ln\"></div><div style=\"text-align:right\"><div class=\"t\">06:41</div><div class=\"lbl\">Сб 24.10</div></div></div>\n<div style=\"display:flex;justify-content:space-between;font-size:14px;gap:10px\"><span>Санкт-Петербург<br><small style=\"color:var(--mut)\">Московский вокзал</small></span><span style=\"text-align:right\">Рязань-2<br><small style=\"color:var(--mut)\"></small></span></div>\n<p style=\"font-size:13px;margin:12px 0 0;color:var(--mut)\">Вагон 08 · купе фирменный (2Т) · место 104, верхнее, 2-й этаж · питание и бельё включены · <a href=\"https://rasp.yandex.ru/thread/R_035A_112?departure_from=2026-10-23+20%3A05%3A00&station_from=9602494&station_to=9600746&to_city=1\">расписание</a></p></div>\n<div class=\"stub\"><div><div class=\"lbl\" style=\"color:#d8d0bd\">Поезд</div><div class=\"num\">035А</div></div><div><div class=\"lbl\" style=\"color:#d8d0bd\">В пути</div><b>10 ч 36 мин</b></div><div><div class=\"lbl\" style=\"color:#d8d0bd\">Цена</div><b>6 255,20 ₽</b></div></div></div><div class=\"pass rv\"><div class=\"main\"><span class=\"badge\">Обратно · куплено</span><div class=\"lbl\" style=\"margin-top:10px\">ФПК, Горьковский филиал</div>\n<div class=\"route\"><div><div class=\"t\">17:49</div><div class=\"lbl\">Пт 30.10</div></div><div class=\"ln\"></div><div style=\"text-align:right\"><div class=\"t\">06:54</div><div class=\"lbl\">Сб 31.10</div></div></div>\n<div style=\"display:flex;justify-content:space-between;font-size:14px;gap:10px\"><span>Владимир<br><small style=\"color:var(--mut)\">Пассажирский, ул. Вокзальная, 2</small></span><span style=\"text-align:right\">Санкт-Петербург<br><small style=\"color:var(--mut)\">Ладожский вокзал</small></span></div>\n<p style=\"font-size:13px;margin:12px 0 0;color:var(--mut)\">Вагон 16 · плацкарт (3Э) · место 023, нижнее · бельё включено, питания нет (есть вагон-ресторан / буфет)</p></div>\n<div class=\"stub\"><div><div class=\"lbl\" style=\"color:#d8d0bd\">Поезд</div><div class=\"num\">131Г</div></div><div><div class=\"lbl\" style=\"color:#d8d0bd\">В пути</div><b>13 ч 05 мин</b></div><div><div class=\"lbl\" style=\"color:#d8d0bd\">Цена</div><b>3 322,00 ₽</b></div></div></div><div class=\"box rv\" style=\"display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px\"><span>Итого за билеты на одного</span><b style=\"font-family:'Playfair Display',serif;font-size:28px;color:var(--g)\">9 577,20 ₽</b></div>\n<p class=\"sub rv\" style=\"margin:0\">Вернуть билет можно онлайн до отправления поезда.</p></div>",
  "checklist": [
-  "Купить обратный билет",
-  "Забронировать жильё в Рязани (24–27 и 28–30.10)",
+  "Купить билет Рязань → Владимир на 29.10 (037С, 22:49)",
+  "Забронировать жильё в Рязани (24–27 и 28–29.10)",
   "Паспорт, билеты офлайн",
   "Тёплая непромокаемая куртка, шапка, удобная обувь для грязи",
   "Зонт, пауэрбанк, наличные на автобусы и рынки",
   "Проверить расписание автобусов (Константиново, Касимов, Спас-Клепики)",
   "Окский заповедник: выбрать время экскурсии (10:30 / 12:30 / 14:30)",
   "Решить про Кирицы (запись на 24.10)",
-  "Жильё в Касимове на 27.10"
+  "Жильё в Касимове на 27.10",
+  "Помнить: вернуть билеты можно онлайн до отправления"
  ],
  "links": [
   {
@@ -267,7 +291,7 @@
    "title": "Окский заповедник"
   }
  ],
- "credits_html": "<a href=\"https://commons.wikimedia.org/wiki/File:Ryazan._Cathedral_of_the_Dormition_and_Cathedral_belltower_of_the_Ryazan_Kremlin_P5160395_2800.jpg\">Рязанский кремль (обложка)</a> и <a href=\"https://commons.wikimedia.org/wiki/File:Ryazan._Kremlin_P5210606_2350.jpg\">вид на кремль</a> © Alexxx1979, CC BY-SA 4.0 ·\n<a href=\"https://commons.wikimedia.org/wiki/File:RybnoeDistrict_06-13_Konstantinovo_village_09.jpg\">Константиново</a> © A.Savin, CC BY-SA 3.0 ·\n<a href=\"https://commons.wikimedia.org/wiki/File:Solotchinsky_Christmas_convent.jpg\">Солотчинский монастырь</a> © Nick Fishman, CC BY-SA 3.0 ·\n<a href=\"https://commons.wikimedia.org/wiki/File:Ryazan_oblast_Kasimov_Khan_mosque.jpg\">Ханская мечеть, Касимов</a> — Ерней, public domain ·\n<a href=\"https://commons.wikimedia.org/wiki/File:%D0%97%D1%83%D0%B1%D1%80_23.jpg\">Зубр</a> © Svklimkin, CC BY-SA 4.0. Карта © OpenStreetMap.",
+ "credits_html": "<a href=\"https://commons.wikimedia.org/wiki/File:Ryazan._Cathedral_of_the_Dormition_and_Cathedral_belltower_of_the_Ryazan_Kremlin_P5160395_2800.jpg\">Рязанский кремль (обложка)</a> и <a href=\"https://commons.wikimedia.org/wiki/File:Ryazan._Kremlin_P5210606_2350.jpg\">вид на кремль</a> © Alexxx1979, CC BY-SA 4.0 ·\n<a href=\"https://commons.wikimedia.org/wiki/File:RybnoeDistrict_06-13_Konstantinovo_village_09.jpg\">Константиново</a> © A.Savin, CC BY-SA 3.0 ·\n<a href=\"https://commons.wikimedia.org/wiki/File:Solotchinsky_Christmas_convent.jpg\">Солотчинский монастырь</a> © Nick Fishman, CC BY-SA 3.0 ·\n<a href=\"https://commons.wikimedia.org/wiki/File:Ryazan_oblast_Kasimov_Khan_mosque.jpg\">Ханская мечеть, Касимов</a> — Ерней, public domain ·\n<a href=\"https://commons.wikimedia.org/wiki/File:%D0%97%D1%83%D0%B1%D1%80_23.jpg\">Зубр</a> © Svklimkin, CC BY-SA 4.0. · <a href=\"https://commons.wikimedia.org/wiki/File:Cathedral_of_Saint_Demetrius,_Vladimir,_Russia.jpg\">Дмитриевский собор, Владимир</a> © Anton Skrobotov, CC BY 2.0. Карта © OpenStreetMap.",
  "reading": [
   "<b>Сериал «Есенин»</b> (2005, 11 серий, Сергей Безруков) — биография поэта; Лидию Кашину играет Ирина Безрукова",
   "<b>К. Паустовский, «Мещёрская сторона»</b> — написана в Солотче, где Паустовский жил много лет; мы будем там 26.10",
