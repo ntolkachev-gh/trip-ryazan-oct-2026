@@ -22,7 +22,7 @@ def page(path,title,body,active,needmap=False):
 def head(t,sub): return f'<header class="ptitle"><h1>{t}</h1><p>{sub}</p></header>'
 days=D['days']
 H=D['hotel']
-FOODPTS=[dict(name=p['name'],addr=p['addr'],lat=p['lat'],lon=p['lon']) for g,L in D['food'] for p in L if p.get('lat')]+[dict(name=H['name']+' (жильё)',addr=H['addr'],lat=H['lat'],lon=H['lon'],hotel=True)]
+FOODPTS=[dict(name=p['name'],addr=p['addr'],lat=p['lat'],lon=p['lon']) for g,L in D['food'] for p in L if p.get('lat')]+[dict(name=b['name'],addr=b['city']+', '+b['addr'],lat=b['lat'],lon=b['lon'],book=True) for b in D.get('book_spots',[])]+[dict(name=H['name']+' (жильё)',addr=H['addr'],lat=H['lat'],lon=H['lon'],hotel=True)]
 HOTEL=f'''<section id="stay"><h2 class="rv">Жильё</h2><div class="box rv"><span class="badge b-o">Почти решено</span><h3 style="color:var(--g);font-size:24px;margin:8px 0 4px">🏨 {H['name']}</h3><p style="margin:0"><b>{H['addr']}</b> · {H['dates']}</p><p style="color:var(--mut)">{H['info']}</p><p><a href="tel:{H['phone'].replace(' ','')}">{H['phone']}</a> · <a href="{H['url']}">Островок</a></p></div></section>'''
 def stt(d): return '<span class="st ok">✓ подтверждено</span>' if d.get('status')=='confirmed' else '<span class="st">черновик</span>'
 def dlink(d): return f'day/{d["date"][-2:]}.html'
@@ -58,7 +58,9 @@ def fcard(p):
     return f'<div class="fc rv">{ph}<div class="fb"><h3>{p["name"]}{tag}</h3><div class="rt">★ {p.get("rating","рейтинг не найден")}</div><p class="why">{p["why"]}</p>{dish}{q}<p class="meta">📍 {p["addr"]}{" (на карте примерно)" if p.get("approx") else ""}<br>🕒 {p["hours"]}<br>💳 {p["check"]}{lk}</p></div></div>'
 FI=D.get('food_intro')
 intro=(f'<section id="taste"><h2 class="rv" style="font-size:30px">Что попробовать: кухня Рязанщины и Владимирской земли</h2><p class="rv" style="max-width:760px">{FI["history"]}</p><div class="tgrid">'+''.join(f'<div class="tc rv"><div class="ti">{i}</div><div><h3>{t}</h3><p>{w}</p><p class="where">📍 {wh}</p>{f"<p class=wk>⚠ {n}</p>" if n else ""}</div></div>' for i,t,w,wh,n in FI['cards'])+f'</div><p class="src rv">{FI["sources"]}</p></section>') if FI else ''
-fs=intro+''.join(f'<section><h2 class="rv" style="font-size:30px">{g}</h2><div class="fgrid">{"".join(fcard(p) for p in L)}</div></section>' for g,L in D['food'])
+BS=D.get('book_spots')
+books=(f'<section id="books"><h2 class="rv" style="font-size:30px">Для книжного блога: атмосферные места для фото</h2><p class="rv" style="max-width:760px">Места, где хорошо снимать книги. Рейтинги в открытых источниках не нашли — не выдумываем. Точки на карте приблизительные (📚).</p><div class="fgrid">'+''.join(fcard(dict(b,name=b['name']+' · '+b['city'],dish='')) for b in BS)+'</div></section>') if BS else ''
+fs=intro+books+''.join(f'<section><h2 class="rv" style="font-size:30px">{g}</h2><div class="fgrid">{"".join(fcard(p) for p in L)}</div></section>' for g,L in D['food'])
 page('food.html','Где поесть',head('Где поесть','Недорого и по-местному. ✓ — часы проверены по сайту или справочнику; перед походом уточняйте. Средний чек на одного.')+f'<div class="wrap">{fs}<section><h2 class="rv" style="font-size:28px">На карте</h2><div class="mini rv" data-map="food" style="height:380px"></div></section></div>','food.html',True)
 cl=''.join(f'<label><input type="checkbox"><span>{x}</span></label>' for x in D['checklist'])
 rd=''.join(f'<label><input type="checkbox"><span>{x}</span></label>' for x in D.get('reading',[]))
