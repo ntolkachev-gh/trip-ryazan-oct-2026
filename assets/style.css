@@ -60,3 +60,4 @@ nav{justify-content:space-between}nav .lnk{display:flex;gap:4px}nav a.on{backgro
 .st{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:none;border-radius:999px;padding:2px 8px;background:#e8dfcc;color:#6f6656;vertical-align:middle}.st.ok{background:#2f5a40;color:#fff}
 .sd .st{margin-top:4px}.booked{background:#fbe9cf;border-left:4px solid var(--o);padding:10px 14px;border-radius:8px;margin:4px 0}
 .box li:has(.booked){list-style:none;margin-left:-20px}
+nav b{white-space:nowrap}@media(min-width:761px) and (max-width:1000px){nav a{padding:5px 7px;font-size:13px}}
