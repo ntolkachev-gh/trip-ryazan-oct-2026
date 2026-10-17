@@ -1,81 +1,124 @@
 <!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Рязань и окрестности · 23–29 октября 2026</title><link rel="icon" href="favicon.svg">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
-body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;margin:0;background:#f5f7fb;color:#1d2433;line-height:1.45}
-header{background:#1e3a8a;color:#fff;padding:22px 24px}h1{margin:0 0 6px;font-size:24px}header p{margin:0;opacity:.9}
-.note{background:#fff7e6;border:1px solid #f5c26b;padding:10px 14px;border-radius:8px;margin:16px 24px;font-size:14px}
-section{margin:16px 24px;background:#fff;border-radius:12px;padding:16px;box-shadow:0 1px 3px #0001}
-h2{margin-top:0;font-size:19px}.sub{color:#555;font-size:14px;margin:-6px 0 14px}
-.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
-.card{border:1px solid #e3e7ef;border-radius:10px;padding:12px}.card .name{font-weight:600;margin-bottom:4px}
-.card .t{font-size:20px;font-weight:700}.card .p{color:#555;font-size:13px;margin-top:4px}
-.ok{border:2px solid #16a34a;background:#f0fdf4}.badge{display:inline-block;font-size:12px;font-weight:600;border-radius:999px;padding:2px 9px;margin-bottom:6px;color:#fff;background:#16a34a}
-.b-warn{background:#d97706}.b-gray{background:#64748b}.b-blue{background:#1d4ed8}
-.day{border-left:4px solid #1d4ed8;padding:8px 12px;margin:10px 0;background:#f8fbff;border-radius:0 8px 8px 0}
-.day h3{margin:0 0 4px;font-size:16px}.day ul{margin:4px 0 0;padding-left:18px;font-size:14px}
-table{border-collapse:collapse;width:100%;font-size:14px}th,td{padding:6px 8px;border-bottom:1px solid #eef0f4;text-align:left;vertical-align:top}th{background:#f0f3f9}
-#map{height:460px;border-radius:8px;border:1px solid #e3e7ef}a{color:#1d4ed8}
-.cl label{display:block;padding:3px 0;font-size:14px}footer{color:#888;font-size:12px;margin:16px 24px 30px}
-@media(max-width:600px){section,.note{margin:12px 10px}header{padding:18px 14px}.tw{overflow-x:auto}}
+:root{--g:#1f3d2b;--g2:#2f5a40;--o:#c8641e;--a:#e0a33b;--paper:#f6efe1;--card:#fffaf0;--ink:#2a2620;--mut:#6f6656;--line:#e5d9c2}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:64px}
+body{margin:0;font-family:Inter,system-ui,sans-serif;background:var(--paper);color:var(--ink);line-height:1.55}
+h1,h2,h3{font-family:'Playfair Display',Georgia,serif;margin:0}a{color:var(--o)}
+nav{position:sticky;top:0;z-index:1000;background:rgba(31,61,43,.94);backdrop-filter:blur(6px);display:flex;gap:4px;align-items:center;padding:10px 18px;overflow-x:auto;white-space:nowrap}
+nav b{font-family:'Playfair Display',serif;color:var(--a);margin-right:12px}nav a{color:#f6efe1;text-decoration:none;font-size:14px;padding:5px 11px;border-radius:999px}nav a:hover{background:#ffffff1f}
+.hero{position:relative;min-height:78vh;display:flex;align-items:flex-end;color:#fff;background:#1f3d2b url(img/kremlin.jpg) center/cover}
+.hero:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#0000 20%,#132619e6 100%)}
+.hero .in{position:relative;padding:48px 6vw;max-width:900px}.kick{letter-spacing:.2em;text-transform:uppercase;font-size:13px;color:var(--a)}
+.hero h1{font-size:clamp(40px,8vw,84px);line-height:1.02;margin:8px 0 14px}.hero h1 i{color:var(--a)}.hero p{font-size:18px;opacity:.92;margin:0}
+.wrap{max-width:1040px;margin:0 auto;padding:0 18px}section{padding:56px 0 8px}
+h2{font-size:clamp(28px,4vw,40px);color:var(--g);margin-bottom:6px}.sub{color:var(--mut);margin:0 0 22px}
+.note{background:#fbe9cf;border-left:4px solid var(--o);padding:14px 18px;border-radius:6px;margin-top:-34px;position:relative;box-shadow:0 8px 24px #0002;font-size:15px}
+.tickets{display:grid;grid-template-columns:2fr 1fr;gap:18px}
+.pass{display:flex;background:var(--card);border-radius:16px;box-shadow:0 6px 22px #3a2a1022;overflow:hidden}
+.pass .main{flex:1;padding:20px 24px}.pass .stub{width:150px;background:var(--g);color:var(--paper);padding:20px 16px;border-left:2px dashed #f6efe188;position:relative;display:flex;flex-direction:column;justify-content:space-between}
+.pass .stub:before,.pass .stub:after{content:"";position:absolute;left:-11px;width:20px;height:20px;border-radius:50%;background:var(--paper)}.pass .stub:before{top:-10px}.pass .stub:after{bottom:-10px}
+.lbl{font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:var(--mut)}.route{display:flex;align-items:center;gap:14px;margin:12px 0}
+.route .t{font-family:'Playfair Display',serif;font-size:38px;font-weight:800;color:var(--g);line-height:1}.route .ln{flex:1;border-top:2px dotted var(--o);position:relative}.route .ln:after{content:"🚆";position:absolute;left:50%;top:-14px;transform:translateX(-50%);background:var(--card);padding:0 6px}
+.stub .num{font-family:'Playfair Display',serif;font-size:34px;color:var(--a)}
+.pend{background:var(--card);border:2px dashed var(--o);border-radius:16px;padding:20px}
+.badge{display:inline-block;font-size:12px;font-weight:600;border-radius:999px;padding:3px 10px;color:#fff;background:var(--g2)}.b-o{background:var(--o)}.b-gr{background:#8a7f6c}.b-a{background:var(--a);color:#2a2620}
+.tl{position:relative;padding-left:46px}.tl:before{content:"";position:absolute;left:18px;top:0;bottom:0;width:3px;background:linear-gradient(var(--a),var(--o),var(--g2))}
+.day{position:relative;background:var(--card);border-radius:16px;box-shadow:0 4px 18px #3a2a101a;margin-bottom:24px;display:grid;grid-template-columns:240px 1fr;overflow:hidden}
+.day .dot{position:absolute;left:-46px;top:20px;width:40px;height:40px;border-radius:50%;background:var(--o);color:#fff;display:grid;place-items:center;font-weight:700;font-family:'Playfair Display',serif;box-shadow:0 0 0 5px var(--paper)}
+.day .ph{background:center/cover #ccc;min-height:200px}.day .bd{padding:18px 22px}.day h3{font-size:24px;color:var(--g)}.day .dt{color:var(--o);font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:.1em}
+.chips{margin:8px 0}.chip{display:inline-block;font-size:12px;border-radius:999px;padding:3px 10px;margin:2px 4px 2px 0;background:#e9efe6;color:var(--g)}.chip.t{background:#fbe9cf;color:#8a4310}
+.day ul{margin:6px 0 0;padding-left:18px;font-size:15px}.day li{margin:3px 0}
+.ret{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.rc{background:var(--card);border-radius:14px;padding:18px;box-shadow:0 4px 16px #3a2a1018;border-top:5px solid var(--g2)}.rc.rec{border-top-color:var(--o);box-shadow:0 8px 26px #c8641e33}.rc.no{opacity:.72;border-top-color:#8a7f6c}
+.rc h3{font-size:19px;margin:8px 0 4px}.rc .tm{font-weight:600}.rc .pr{font-family:'Playfair Display',serif;font-size:20px;color:var(--g);margin:6px 0}.rc p{font-size:14px;color:var(--mut);margin:4px 0}
+#map{height:480px;border-radius:16px;box-shadow:0 4px 18px #3a2a101a}.mk{width:30px;height:30px;border-radius:50%;color:#fff;font-weight:700;display:grid;place-items:center;border:3px solid #fff;box-shadow:0 2px 6px #0005;font-size:13px}
+.legend{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px;font-size:13px}.legend span:before{content:"";display:inline-block;width:12px;height:12px;border-radius:50%;background:var(--c);margin-right:5px;vertical-align:-1px}
+.cl{background:var(--card);border-radius:16px;padding:16px 20px;columns:2;column-gap:30px}.cl label{display:flex;gap:10px;padding:7px 0;break-inside:avoid;cursor:pointer}
+.cl input{accent-color:var(--o);width:18px;height:18px;margin-top:3px}.cl input:checked+span{text-decoration:line-through;color:var(--mut)}
+.links{display:flex;flex-wrap:wrap;gap:10px}.links a{background:var(--g);color:var(--paper);text-decoration:none;padding:8px 14px;border-radius:999px;font-size:14px}.links a:hover{background:var(--o)}
+footer{background:var(--g);color:#d8d0bd;margin-top:60px;padding:30px 0;font-size:12.5px}footer a{color:var(--a)}
+.rv{opacity:0;transform:translateY(24px);transition:.7s ease}.rv.on{opacity:1;transform:none}
+@media(max-width:760px){.tickets{grid-template-columns:1fr}.day{grid-template-columns:1fr}.day .ph{min-height:170px}.pass .stub{width:100px}.route .t{font-size:28px}.cl{columns:1}.tl{padding-left:34px}.tl:before{left:12px}.day .dot{left:-36px;width:30px;height:30px;font-size:13px}.hero{min-height:64vh}#map{height:380px}}
 </style></head><body>
-<header><h1>Рязань и окрестности</h1><p>Пт 23 октября 20:05 из Петербурга · дома в Петербурге до 10:00 в чт 29 октября</p></header>
-<div class="note"><b>Черновик для обсуждения.</b> План по дням ещё не утверждён. Цены отмечены как «проверено» или «примерно». В конце октября часть музеев работает по сокращённому графику, а погода около +2…+8 °C, возможен дождь. Расписание автобусов проверяйте накануне.</div>
+<nav><b>Рязань ’26</b><a href="#tickets">Билеты</a><a href="#plan">План</a><a href="#return">Обратно</a><a href="#map-s">Карта</a><a href="#check">Чек-лист</a></nav>
+<header class="hero"><div class="in"><div class="kick">Осеннее путешествие · черновик</div><h1>Рязань <i>и окрестности</i></h1><p>Пт 23 октября 20:05 из Петербурга · дома в Петербурге до 10:00 в чт 29 октября</p></div></header>
+<div class="wrap">
+<div class="note rv"><b>Черновик для обсуждения.</b> План по дням ещё не утверждён. Цены отмечены как «проверено» или «примерно». В конце октября часть музеев работает по сокращённому графику, а погода около +2…+8 °C, возможен дождь. Расписание автобусов проверяйте накануне.</div>
 
-<section><h2>Билеты</h2><div class="cards">
-<div class="card ok"><span class="badge">Куплено</span><div class="name">Поезд 035А «Северная Пальмира» (двухэтажный)</div>
-<div class="t">23.10 20:05 → 24.10 06:41</div><div class="p">Санкт-Петербург, Московский вокзал → Рязань-2<br><a href="https://rasp.yandex.ru/thread/R_035A_112?departure_from=2026-10-23+20%3A05%3A00&station_from=9602494&station_to=9600746&to_city=1">Расписание на Яндекс Расписаниях</a></div></div>
-<div class="card"><span class="badge b-warn">Не куплено</span><div class="name">Обратный билет</div><div class="t">до 29.10 ~09:00</div><div class="p">Варианты ниже, в разделе «Возвращение»</div></div>
+<section id="tickets"><h2 class="rv">Билеты</h2><p class="sub rv">Туда уже едем, обратный пока выбираем.</p><div class="tickets rv">
+<div class="pass"><div class="main"><span class="badge">Куплено</span><div class="lbl" style="margin-top:10px">Фирменный поезд «Северная Пальмира» · двухэтажный</div>
+<div class="route"><div><div class="t">20:05</div><div class="lbl">Пт 23.10</div></div><div class="ln"></div><div style="text-align:right"><div class="t">06:41</div><div class="lbl">Сб 24.10</div></div></div>
+<div style="display:flex;justify-content:space-between;font-size:14px"><span>Санкт-Петербург<br><small style="color:var(--mut)">Московский вокзал</small></span><span style="text-align:right">Рязань-2</span></div>
+<p style="font-size:13px;margin:12px 0 0"><a href="https://rasp.yandex.ru/thread/R_035A_112?departure_from=2026-10-23+20%3A05%3A00&station_from=9602494&station_to=9600746&to_city=1">Расписание на Яндекс Расписаниях →</a></p></div>
+<div class="stub"><div><div class="lbl" style="color:#d8d0bd">Поезд</div><div class="num">035А</div></div><div><div class="lbl" style="color:#d8d0bd">В пути</div><b>10 ч 36 мин</b></div></div></div>
+<div class="pend"><span class="badge b-o">Не куплено</span><h3 style="margin:10px 0 4px;color:var(--g)">Обратный билет</h3><div class="route" style="margin:6px 0"><div class="t" style="font-size:30px">до 29.10 ~09:00</div></div><p style="font-size:14px;color:var(--mut);margin:0">Варианты ниже, в разделе <a href="#return">«Возвращение»</a></p></div>
 </div></section>
 
-<section><h2>План по дням (черновик)</h2><p class="sub">Базу удобно держать в Рязани, рядом с центром или Рязанью-2. Касимов можно сделать с ночёвкой.</p>
-<div class="day"><h3>Сб 24.10 · Рязань</h3><ul>
+<section id="plan"><h2 class="rv">План по дням (черновик)</h2><p class="sub rv">Базу удобно держать в Рязани, рядом с центром или Рязанью-2. Касимов можно сделать с ночёвкой.</p><div class="tl">
+<div class="day rv"><div class="dot">1</div><div class="ph" style="background-image:url(img/kremlin.jpg)"></div><div class="bd"><div class="dt">Сб 24.10</div><h3>🏰 Рязань</h3>
+<div class="chips"><span class="chip t">06:41 прибытие</span><span class="chip">🚶 пешком</span></div><ul>
 <li>06:41 прибытие, завтрак, оставить вещи в отеле.</li>
 <li>Рязанский кремль: Успенский собор, колокольня, Дворец Олега, Соборный парк. Режим работы музея проверьте на <a href="https://ryazankreml.ru/">ryazankreml.ru</a>.</li>
 <li>Вечером улица Почтовая, Лыбедский бульвар, набережная Трубежа.</li>
-<li>Что попробовать: рязанская кухня (калачи, «рязанские» пироги), местные кафе на Почтовой.</li></ul></div>
-<div class="day"><h3>Вс 25.10 · Константиново и Пощупово</h3><ul>
+<li>Что попробовать: рязанская кухня (калачи, «рязанские» пироги), местные кафе на Почтовой.</li></ul></div></div>
+<div class="day rv"><div class="dot">2</div><div class="ph" style="background-image:url(img/konst.jpg)"></div><div class="bd"><div class="dt">Вс 25.10</div><h3>📜 Константиново и Пощупово</h3>
+<div class="chips"><span class="chip">🚌 автобус ~1–1,5 ч</span><span class="chip">🚕 такси ~50 км</span><span class="chip t">10:00–18:00, касса до 17:00</span></div><ul>
 <li>Автобус с Центрального автовокзала Рязани до Константинова, примерно 1–1,5 ч, или такси (около 50 км).</li>
 <li>Музей-заповедник Есенина: <b>в октябре ежедневно 10:00–18:00, касса до 17:00</b> (по сообщению музея от 07.10.2026, <a href="https://www.museum-esenin.ru/posetitelyam/rezhim-raboty">сайт</a>). Усадьба родителей, дом Кашиной, вид на Оку.</li>
-<li>Константиновская чайная (в выходные до 20:00), затем Иоанно-Богословский монастырь в Пощупове (такси примерно 20 мин).</li></ul></div>
-<div class="day"><h3>Пн 26.10 · Солотча, Мещёра, Спас-Клепики</h3><ul>
+<li>Константиновская чайная (в выходные до 20:00), затем Иоанно-Богословский монастырь в Пощупове (такси примерно 20 мин).</li></ul></div></div>
+<div class="day rv"><div class="dot">3</div><div class="ph" style="background-image:url(img/solotcha.jpg)"></div><div class="bd"><div class="dt">Пн 26.10</div><h3>🌲 Солотча, Мещёра, Спас-Клепики</h3>
+<div class="chips"><span class="chip">🚌 автобус / 🚕 такси ~20 км</span><span class="chip">🚌 ~1,5 ч до Клепиков</span><span class="chip t">пн — музеи часто закрыты</span></div><ul>
 <li>Солотча (около 20 км, автобус или такси): Солотчинский монастырь, сосновый бор, тропы Мещёры.</li>
 <li>Спас-Клепики (около 1,5 ч на автобусе): школа-музей Есенина, Клепиковские озёра. Многие музеи в понедельник закрыты, проверьте заранее.</li>
-<li>Если хочется спокойнее, можно ограничиться Солотчей и прогулкой по лесу.</li></ul></div>
-<div class="day"><h3>Вт 27.10 · Касимов (можно с ночёвкой)</h3><ul>
+<li>Если хочется спокойнее, можно ограничиться Солотчей и прогулкой по лесу.</li></ul></div></div>
+<div class="day rv"><div class="dot">4</div><div class="ph" style="background-image:url(img/kasimov.jpg)"></div><div class="bd"><div class="dt">Вт 27.10</div><h3>🕌 Касимов (можно с ночёвкой)</h3>
+<div class="chips"><span class="chip">🚌 автобус ~3–3,5 ч</span><span class="chip">~180 км</span></div><ul>
 <li>Автобус из Рязани около 3–3,5 ч (около 180 км).</li>
 <li>Ханская мечеть с минаретом, Текие, торговые ряды, Музей самоваров, набережная Оки.</li>
 <li>Что попробовать: татарская выпечка (эчпочмак, чак-чак).</li>
-<li>Альтернатива на этот день: Скопин (гончарный промысел, музей керамики) и усадьба фон Дервиза в Кирицах.</li></ul></div>
-<div class="day"><h3>Ср 28.10 · Окский заповедник или Истье, вечером домой</h3><ul>
+<li>Альтернатива на этот день: Скопин (гончарный промысел, музей керамики) и усадьба фон Дервиза в Кирицах.</li></ul></div></div>
+<div class="day rv"><div class="dot">5</div><div class="ph" style="background-image:url(img/bison.jpg)"></div><div class="bd"><div class="dt">Ср 28.10</div><h3>🦬 Окский заповедник или Истье, вечером домой</h3>
+<div class="chips"><span class="chip">🚕 такси / 🚌 автобус</span><span class="chip">🚆 «Ласточка» + ночной поезд</span><span class="chip t">экскурсии по записи</span></div><ul>
 <li>Окский заповедник с зубровым питомником (Брыкин Бор, около Спасска-Рязанского): посещение обычно по экскурсиям с записью, проверьте наличие экскурсий в конце октября.</li>
 <li>Спасск-Рязанский: набережная Оки, раскопки Старой Рязани неподалёку (городище, в основном на открытом воздухе).</li>
-<li>Вечером в Москву на «Ласточке» и ночным поездом в Петербург (см. ниже).</li></ul></div>
-</section>
+<li>Вечером в Москву на «Ласточке» и ночным поездом в Петербург (см. ниже).</li></ul></div></div>
+</div></section>
 
-<section><h2>Возвращение</h2><p class="sub">Цены с Яндекс Расписаний на 17.10.2026, нижняя граница на одного. Они меняются, перед покупкой перепроверьте.</p>
-<div class="tw"><table><tr><th>Вариант</th><th>Время</th><th>Цена</th><th>Комментарий</th></tr>
-<tr><td><b>Через Москву</b>: «Ласточка» Рязань → Москва + ночной поезд</td><td>28.10 вечер → 29.10 05:56–07:19</td><td>ночной: 120В плацкарт ~2 582 ₽, 028А ~3 082 ₽ (tutu, 16.10) · «Ласточка» не проверена</td><td>Рекомендуется: 120В 21:28→07:19, 020У 22:50→07:00, 028А 22:08→05:56 из Москвы. Расписание «Ласточки» не проверено</td></tr>
-<tr><td>105У Оренбург — Санкт-Петербург</td><td>27.10 19:56 Рязань-1 → 28.10 07:29</td><td>купе от 6 811 ₽ ✓</td><td>Проверено. Прямой, но в поездке на день меньше</td></tr>
-<tr><td>007С Симферополь — Санкт-Петербург</td><td>28.10 00:37 Рязань-2 → 28.10 09:53</td><td>плацкарт от 2 828 ₽ ✓</td><td>Проверено. Отправление в ночь с 27-го на 28-е</td></tr>
-<tr><td>007С, ночь с 28-го на 29-е</td><td>29.10 00:37 → 29.10 09:53</td><td>плацкарт от 2 828 ₽ ✓</td><td>⚠ Прибытие на вокзал в 09:53, домой до 10:00 не успеть</td></tr>
-<tr><td>035С / 109Ж</td><td>00:29→10:40 / 00:39→12:11</td><td>—</td><td>Не подходят: приходят слишком поздно</td></tr>
-</table></div></section>
+<section id="return"><h2 class="rv">Возвращение</h2><p class="sub rv">Цены с Яндекс Расписаний на 17.10.2026, нижняя граница на одного. Они меняются, перед покупкой перепроверьте.</p><div class="ret">
+<div class="rc rec rv"><span class="badge b-o">★ Рекомендуем</span><h3>Через Москву</h3><div class="tm">28.10 вечер → 29.10 05:56–07:19</div><div class="pr">120В плацкарт ~2 582 ₽ · 028А ~3 082 ₽</div><p>«Ласточка» Рязань → Москва, затем ночной поезд из Москвы: 120В 21:28→07:19, 020У 22:50→07:00, 028А 22:08→05:56. Цены ночных поездов с tutu от 16.10; расписание «Ласточки» не проверено.</p></div>
+<div class="rc rv"><span class="badge">Прямой</span> <span class="badge b-a">✓ проверено</span><h3>105У Оренбург — Санкт-Петербург</h3><div class="tm">27.10 19:56 Рязань-1 → 28.10 07:29</div><div class="pr">купе от 6 811 ₽</div><p>Прямой, но в поездке на день меньше.</p></div>
+<div class="rc rv"><span class="badge">Прямой</span> <span class="badge b-a">✓ проверено</span><h3>007С Симферополь — Санкт-Петербург</h3><div class="tm">28.10 00:37 Рязань-2 → 28.10 09:53</div><div class="pr">плацкарт от 2 828 ₽</div><p>Отправление в ночь с 27-го на 28-е.</p></div>
+<div class="rc no rv"><span class="badge b-gr">Не подходит</span><h3>007С, ночь с 28-го на 29-е</h3><div class="tm">29.10 00:37 → 29.10 09:53</div><div class="pr">плацкарт от 2 828 ₽ ✓</div><p>⚠ Прибытие на вокзал в 09:53, домой до 10:00 не успеть.</p></div>
+<div class="rc no rv"><span class="badge b-gr">Не подходит</span><h3>035С / 109Ж</h3><div class="tm">00:29→10:40 / 00:39→12:11</div><div class="pr">—</div><p>Приходят слишком поздно.</p></div>
+</div></section>
 
-<section><h2>Карта</h2><div id="map"></div></section>
+<section id="map-s"><h2 class="rv">Карта</h2><p class="sub rv">Цвет и номер метки — день поездки.</p><div id="map" class="rv"></div>
+<div class="legend"><span style="--c:#c8641e">1 · Рязань</span><span style="--c:#b8452b">2 · Константиново</span><span style="--c:#2f5a40">3 · Мещёра</span><span style="--c:#7a4b8c">4 · Касимов / Скопин</span><span style="--c:#c99a2e">5 · Окский / Спасск</span></div></section>
 
-<section><h2>Чек-лист</h2><div class="cl">
-<label><input type="checkbox"> Купить обратный билет</label><label><input type="checkbox"> Забронировать жильё в Рязани (и в Касимове при ночёвке)</label>
-<label><input type="checkbox"> Паспорт, билеты офлайн</label><label><input type="checkbox"> Тёплая непромокаемая куртка, шапка, удобная обувь для грязи</label>
-<label><input type="checkbox"> Зонт, пауэрбанк, наличные на автобусы и рынки</label><label><input type="checkbox"> Проверить расписание автобусов (Константиново, Касимов, Спас-Клепики)</label>
-<label><input type="checkbox"> Записаться на экскурсию в Окский заповедник</label></div>
-<h2 style="margin-top:16px">Полезные ссылки</h2><ul>
-<li><a href="https://rasp.yandex.ru/">Яндекс Расписания</a> · <a href="https://www.tutu.ru/poezda/">Туту — поезда</a> · <a href="https://ticket.rzd.ru/">РЖД</a></li>
-<li><a href="https://www.museum-esenin.ru/">Музей-заповедник Есенина</a> · <a href="https://ryazankreml.ru/">Рязанский кремль</a> · <a href="https://www.oka-reserve.ru/">Окский заповедник</a></li></ul></section>
-<footer>Черновик собран 17.10.2026. Время везде московское.</footer>
+<section id="check"><h2 class="rv">Чек-лист</h2><p class="sub rv">Отметки сохраняются в этом браузере.</p><div class="cl rv">
+<label><input type="checkbox"><span>Купить обратный билет</span></label><label><input type="checkbox"><span>Забронировать жильё в Рязани (и в Касимове при ночёвке)</span></label>
+<label><input type="checkbox"><span>Паспорт, билеты офлайн</span></label><label><input type="checkbox"><span>Тёплая непромокаемая куртка, шапка, удобная обувь для грязи</span></label>
+<label><input type="checkbox"><span>Зонт, пауэрбанк, наличные на автобусы и рынки</span></label><label><input type="checkbox"><span>Проверить расписание автобусов (Константиново, Касимов, Спас-Клепики)</span></label>
+<label><input type="checkbox"><span>Записаться на экскурсию в Окский заповедник</span></label></div>
+<h2 class="rv" style="font-size:28px;margin-top:40px">Полезные ссылки</h2><div class="links rv" style="margin-top:14px">
+<a href="https://rasp.yandex.ru/">Яндекс Расписания</a><a href="https://www.tutu.ru/poezda/">Туту — поезда</a><a href="https://ticket.rzd.ru/">РЖД</a><a href="https://www.museum-esenin.ru/">Музей-заповедник Есенина</a><a href="https://ryazankreml.ru/">Рязанский кремль</a><a href="https://www.oka-reserve.ru/">Окский заповедник</a></div></section>
+</div>
+<footer><div class="wrap">Черновик собран 17.10.2026. Время везде московское.<br><br>Фото: Wikimedia Commons —
+<a href="https://commons.wikimedia.org/wiki/File:Belltower_Ryazan_Kremlin_9.jpg">Рязанский кремль</a> © Xardaas, CC BY-SA 4.0 ·
+<a href="https://commons.wikimedia.org/wiki/File:RybnoeDistrict_06-13_Konstantinovo_village_09.jpg">Константиново</a> © A.Savin, CC BY-SA 3.0 ·
+<a href="https://commons.wikimedia.org/wiki/File:Solotchinsky_Christmas_convent.jpg">Солотчинский монастырь</a> © Nick Fishman, CC BY-SA 3.0 ·
+<a href="https://commons.wikimedia.org/wiki/File:Ryazan_oblast_Kasimov_Khan_mosque.jpg">Ханская мечеть, Касимов</a> — Ерней, public domain ·
+<a href="https://commons.wikimedia.org/wiki/File:%D0%97%D1%83%D0%B1%D1%80_23.jpg">Зубр</a> © Svklimkin, CC BY-SA 4.0. Карта © OpenStreetMap, © CARTO.</div></footer>
 <script>
-const P=[["Рязанский кремль",54.6363,39.7499],["Рязань-2 (вокзал)",54.6287,39.7366],["Константиново, музей Есенина",54.8472,39.5904],["Пощупово, монастырь",54.8681,39.6417],["Солотча",54.7864,39.8389],["Спас-Клепики",55.1297,40.1756],["Касимов",54.9372,41.3914],["Скопин",53.8236,39.5503],["Истье, усадьба",53.9339,39.3667],["Окский заповедник, зубровый питомник",54.735,40.85],["Спасск-Рязанский",54.4083,40.3833],["Старая Рязань",54.4583,40.0806]];
-const m=L.map('map').setView([54.6,40.2],8);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap'}).addTo(m);
-P.forEach(p=>L.marker([p[1],p[2]]).addTo(m).bindPopup(p[0]));
+const C={1:'#c8641e',2:'#b8452b',3:'#2f5a40',4:'#7a4b8c',5:'#c99a2e'};
+const P=[[1,"Рязанский кремль",54.6363,39.7499],[1,"Рязань-2 (вокзал)",54.6287,39.7366],[2,"Константиново, музей Есенина",54.8472,39.5904],[2,"Пощупово, монастырь",54.8681,39.6417],[3,"Солотча",54.7864,39.8389],[3,"Спас-Клепики",55.1297,40.1756],[4,"Касимов",54.9372,41.3914],[4,"Скопин (альтернатива)",53.8236,39.5503],[4,"Истье, усадьба",53.9339,39.3667],[5,"Окский заповедник, зубровый питомник",54.735,40.85],[5,"Спасск-Рязанский",54.4083,40.3833],[5,"Старая Рязань",54.4583,40.0806]];
+const m=L.map('map',{scrollWheelZoom:false}).setView([54.6,40.2],8);
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{attribution:'© OpenStreetMap © CARTO',subdomains:'abcd'}).addTo(m);
+P.forEach(p=>L.marker([p[2],p[3]],{icon:L.divIcon({className:'',html:`<div class="mk" style="background:${C[p[0]]}">${p[0]}</div>`,iconSize:[30,30],iconAnchor:[15,15]})}).addTo(m).bindPopup(`<b>День ${p[0]}</b><br>${p[1]}`));
+document.querySelectorAll('.cl input').forEach((c,i)=>{const k='ryz-cl-'+i;c.checked=localStorage.getItem(k)==='1';c.onchange=()=>localStorage.setItem(k,c.checked?'1':'0')});
+const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('on');io.unobserve(x.target)}}),{threshold:.08});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 </script></body></html>
