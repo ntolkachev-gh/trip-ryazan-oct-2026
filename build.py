@@ -11,10 +11,10 @@ def page(path,title,body,active,needmap=False):
     mp='<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>' if needmap else ''
     data=f'<script>window.TRIP={json.dumps(dict(points=D["points"],colors=D["colors"]),ensure_ascii=False)}</script>' if needmap else ''
     html=f'''<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>{title} · Рязань, октябрь 2026</title><link rel="icon" href="{r}favicon.svg">
+<title>{title} · Рязань и Владимир, октябрь 2026</title><meta name="description" content="Рязань и Владимир: поездка 23–31 октября 2026 — Рязань, Константиново, Мещёра, Суздаль, Владимир"><meta property="og:title" content="{title} · Рязань и Владимир"><meta property="og:description" content="Поездка 23–31 октября 2026: Рязань, Константиново, Мещёра, Суздаль, Владимир"><link rel="icon" href="{r}favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 {mp}<link rel="stylesheet" href="{r}assets/style.css"></head><body>
-<nav><b>Рязань ’26</b><button class="burger" aria-label="Меню">☰</button><div class="lnk">{nav}</div></nav>
+<nav><b>Рязань · Владимир ’26</b><button class="burger" aria-label="Меню">☰</button><div class="lnk">{nav}</div></nav>
 {body.replace('img/',r+'img/').replace('href="day/','href="'+r+'day/')}
 <footer><div class="wrap">Черновик собран 17.10.2026. Время везде московское.<br><br>Фото: Wikimedia Commons — {D["credits_html"]}</div></footer>
 {data}<script src="{r}assets/app.js"></script></body></html>'''
@@ -25,7 +25,7 @@ def stt(d): return '<span class="st ok">✓ подтверждено</span>' if 
 def dlink(d): return f'day/{d["date"][-2:]}.html'
 strip=''.join(f'<a class="sd rv" href="{dlink(d)}" style="background-image:url(img/{d["img"]}.jpg)"><span><b>{d["dt"]}</b>{d["title"]}<br>{stt(d)}</span></a>' for d in days)
 tiles=[('tickets.html','🎫','Билеты','Оба поезда куплены'),('plan.html','🗓️','План','Рязань, Константиново, Мещёра, Суздаль, Владимир'),('map.html','🗺️','Карта','Все точки, фильтр по дням'),('checklist.html','✅','Чек-лист','Сборы и полезные ссылки'),('diary.html','📔','Дневник','Заметки и фото из поездки')]
-page('index.html','Главная',f'''<header class="hero"><div class="in"><div class="kick">Осеннее путешествие · черновик</div><h1>Рязань <i>и окрестности</i></h1><p>{D["dates"]}</p></div></header>
+page('index.html','Главная',f'''<header class="hero"><div class="in"><div class="kick">Осеннее путешествие · черновик</div><h1>Рязань <i>и Владимир</i></h1><p>{D["dates"]}</p></div></header>
 <div class="wrap"><div class="note rv">{D["note"]}</div>
 <section><h2 class="rv">Коротко</h2><p class="sub rv">Ночным поездом в Рязань, неделя по городу и области: кремль, Есенинское Константиново, Мещёра, Окский заповедник с зубрами, затем ночным поездом в Суздаль и Владимир. Из Владимира, оттуда ночным поездом 30→31 октября в Петербург.</p>
 <div class="grid">{''.join(f'<a class="tile rv" href="{h}"><div class="ic">{i}</div><h3>{t}</h3><p>{p}</p></a>' for h,i,t,p in tiles)}</div></section>
