@@ -5,7 +5,7 @@ const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 const D=window.TRIP;if(!D||!window.L)return;
 const icon=d=>L.divIcon({className:'',html:`<div class="mk" style="background:${D.colors[d]}">${d}</div>`,iconSize:[30,30],iconAnchor:[15,15]});
-const tiles=m=>L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{attribution:'© OpenStreetMap © CARTO',subdomains:'abcd'}).addTo(m);
+const tiles=m=>L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap',className:'muted'}).addTo(m);
 document.querySelectorAll('[data-map]').forEach(el=>{
  const only=el.dataset.map==='all'?null:+el.dataset.map;const m=L.map(el,{scrollWheelZoom:false});tiles(m);
  const layers={};D.points.filter(p=>!only||p.day===only).forEach(p=>{const mk=L.marker([p.lat,p.lon],{icon:icon(p.day)}).bindPopup(`<b>День ${p.day}</b><br>${p.name}`);(layers[p.day]=layers[p.day]||L.layerGroup().addTo(m)).addLayer(mk)});
