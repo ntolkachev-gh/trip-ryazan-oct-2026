@@ -2,7 +2,7 @@
 """Генерирует все страницы сайта из data.json. Запуск: python3 build.py"""
 import json,os
 D=json.load(open('data.json',encoding='utf8'))
-NAV=[('index.html','Главная'),('tickets.html','Билеты'),('plan.html','План'),('map.html','Карта'),('food.html','Еда'),('checklist.html','Чек-лист'),('diary.html','Дневник')]
+NAV=[('index.html','Главная'),('tickets.html','Билеты'),('plan.html','План'),('map.html','Карта'),('food.html','Еда'),('cuisine.html','Кухня'),('checklist.html','Чек-лист'),('diary.html','Дневник')]
 WD={'2026-10-24':'Сб','2026-10-25':'Вс','2026-10-26':'Пн','2026-10-27':'Вт','2026-10-28':'Ср','2026-10-29':'Чт','2026-10-30':'Пт'}
 def chips(c): return ''.join(f'<span class="chip{" t" if x.startswith("!") else ""}">{x.lstrip("!")}</span>' for x in c)
 def page(path,title,body,active,needmap=False):
@@ -60,7 +60,8 @@ FI=D.get('food_intro')
 intro=(f'<section id="taste"><h2 class="rv" style="font-size:30px">Что попробовать: кухня Рязанщины и Владимирской земли</h2><p class="rv" style="max-width:760px">{FI["history"]}</p><div class="tgrid">'+''.join(f'<div class="tc rv"><div class="ti">{i}</div><div><h3>{t}</h3><p>{w}</p><p class="where">📍 {wh}</p>{f"<p class=wk>⚠ {n}</p>" if n else ""}</div></div>' for i,t,w,wh,n in FI['cards'])+f'</div><p class="src rv">{FI["sources"]}</p></section>') if FI else ''
 BS=D.get('book_spots')
 books=(f'<section id="books"><h2 class="rv" style="font-size:30px">Для книжного блога: атмосферные места для фото</h2><p class="rv" style="max-width:760px">Места, где хорошо снимать книги. Рейтинги в открытых источниках не нашли — не выдумываем. Точки на карте приблизительные (📚).</p><div class="fgrid">'+''.join(fcard(dict(b,name=b['name']+' · '+b['city'],dish='')) for b in BS)+'</div></section>') if BS else ''
-fs=intro+books+''.join(f'<section><h2 class="rv" style="font-size:30px">{g}</h2><div class="fgrid">{"".join(fcard(p) for p in L)}</div></section>' for g,L in D['food'])
+teaser='<section><a class="tc rv" href="cuisine.html" style="text-decoration:none;color:inherit;max-width:760px"><div class="ti">🥧</div><div><h3>Что попробовать: кухня Рязанщины и Владимирской земли →</h3><p>Курник, калинник, медовуха, суздальские огурцы, сбитень — история и где попробовать.</p></div></a></section>' if FI else ''
+fs=teaser+books+''.join(f'<section><h2 class="rv" style="font-size:30px">{g}</h2><div class="fgrid">{"".join(fcard(p) for p in L)}</div></section>' for g,L in D['food'])
 page('food.html','Где поесть',head('Где поесть','Недорого и по-местному. ✓ — часы проверены по сайту или справочнику; перед походом уточняйте. Средний чек на одного.')+f'<div class="wrap">{fs}<section><h2 class="rv" style="font-size:28px">На карте</h2><div class="mini rv" data-map="food" style="height:380px"></div></section></div>','food.html',True)
 cl=''.join(f'<label><input type="checkbox"><span>{x}</span></label>' for x in D['checklist'])
 rd=''.join(f'<label><input type="checkbox"><span>{x}</span></label>' for x in D.get('reading',[]))
@@ -68,4 +69,5 @@ lk=''.join(f'<a href="{l["url"]}">{l["title"]}</a>' for l in D['links'])
 page('checklist.html','Чек-лист',head('Чек-лист','Отметки сохраняются в этом браузере.')+f'<div class="wrap"><section><div class="cl rv">{cl}</div></section><section><h2 class="rv">Посмотреть и почитать перед поездкой</h2><div class="cl rv">{rd}</div></section><section><h2 class="rv">Полезные ссылки</h2><div class="links rv">{lk}</div></section></div>','checklist.html')
 dl=''.join(f'<a class="rv" href="{dlink(d)}#was"><div class="th" style="background-image:url(img/{d["img"]}.jpg)"></div><div><b>{d["dt"]} · {d["title"]}</b><br>{stt(d)} <small>{"Есть заметки" if d.get("diary") else "Пока пусто"}</small></div></a>' for d in days)
 page('diary.html','Дневник',head('Дневник','Заполняется во время и после поездки.')+f'<div class="wrap"><section><div class="dl">{dl}</div></section></div>','diary.html')
+page('cuisine.html','Кухня',head('Кухня','Что попробовать на Рязанщине и во Владимирской земле.')+f'<div class="wrap">{intro}<section><a class="rv" href="food.html">← Где поесть</a></section></div>','cuisine.html')
 print('ok')
