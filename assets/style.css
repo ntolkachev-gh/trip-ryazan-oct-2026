@@ -57,3 +57,6 @@ nav{justify-content:space-between}nav .lnk{display:flex;gap:4px}nav a.on{backgro
 @media(max-width:760px){.burger{display:block}nav .lnk{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;background:#1f3d2bf5;padding:10px}nav.open .lnk{display:flex}nav{overflow:visible}
 .strip{grid-template-columns:repeat(7,150px);overflow-x:auto;padding-bottom:6px}.pn{flex-direction:column}}
 .muted{filter:grayscale(.75) sepia(.25) brightness(1.04) contrast(.92)}
+.st{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:none;border-radius:999px;padding:2px 8px;background:#e8dfcc;color:#6f6656;vertical-align:middle}.st.ok{background:#2f5a40;color:#fff}
+.sd .st{margin-top:4px}.booked{background:#fbe9cf;border-left:4px solid var(--o);padding:10px 14px;border-radius:8px;margin:4px 0}
+.box li:has(.booked){list-style:none;margin-left:-20px}

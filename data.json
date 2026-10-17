@@ -28,18 +28,24 @@
    "date": "2026-10-25",
    "dt": "Вс 25.10",
    "img": "konst",
-   "title": "📜 Константиново и Пощупово",
+   "title": "📜 Константиново: весь день",
    "chips": [
-    "🚌 автобус ~1–1,5 ч",
-    "🚕 такси ~50 км",
-    "!10:00–18:00, касса до 17:00"
+    "🚌 132: 09:40 → 10:56",
+    "!★ экскурсия 15:00–16:00 забронирована",
+    "!касса музея до 17:00",
+    "🚌 обратно 20:00"
    ],
    "items": [
-    "Автобус с Центрального автовокзала Рязани до Константинова, примерно 1–1,5 ч, или такси (около 50 км).",
-    "Музей-заповедник Есенина: <b>с 5 по 31 октября ежедневно 10:00–18:00, касса до 17:00</b> (сообщение музея от 07.10.2026, <a href=\"https://www.museum-esenin.ru/posetitelyam/rezhim-raboty\">сайт</a>). Усадьба родителей, дом Кашиной, вид на Оку.",
-    "Константиновская чайная (в выходные до 20:00), затем Иоанно-Богословский монастырь в Пощупове (такси примерно 20 мин)."
+    "<b>09:40</b> автобус № 132 с автовокзала «Центральный» → Константиново <b>10:56</b> (ежедневно, ~180 ₽; расписание по сайту музея и tutu — проверено, перед поездкой уточнить). Ранний вариант: 06:10 → 07:26. Или такси, около 50 км, ~1 ч (примерно).",
+    "<b>11:00–13:00</b> музей-заповедник: усадьба родителей Есенина, Константиновская школа, дом священника Смирнова, вид с обрыва на Оку. В октябре ежедневно 10:00–18:00, <b>касса до 17:00</b> (<a href=\"https://www.museum-esenin.ru/posetitelyam/rezhim-raboty\">сайт</a>).",
+    "<b>13:00–14:45</b> обед в Константиновской чайной (в выходные до 20:00), прогулка по селу.",
+    "<div class=\"booked\">★ <b>15:00–16:00 — экскурсия «Есенин, Константиново»</b> · забронирована, подтверждено</div>",
+    "<b>16:00–17:00</b> усадьба Кашиной (музей поэмы «Анна Снегина»), если не вошла в экскурсию; закат над Окой около 16:45 (примерно). Билеты купить до 17:00.",
+    "Пощупово (Иоанно-Богословский монастырь, ~20 мин на такси) — только если останется время; по умолчанию не планируем.",
+    "<b>Обратно:</b> автобус в <b>20:00</b> из Константинова в Рязань через Рыбное, на автовокзал «Центральный» (по сайту музея, ежедневно — проверено), в Рязани примерно в 21:15. Пока ждём — чайная до 20:00. Раньше: газель в Рыбное в <b>17:00</b> (сайт музея — проверено), оттуда маршрутка № 241 в Рязань (расписание не проверено, примерно 30–40 мин). Или такси ~1 ч (примерно). Автобус в 15:00 пересекается с экскурсией."
    ],
-   "diary": ""
+   "diary": "",
+   "status": "confirmed"
   },
   {
    "n": 3,
@@ -254,6 +260,7 @@
  },
  "ticket_html": "<div style=\"display:grid;gap:22px\"><div class=\"pass rv\"><div class=\"main\"><span class=\"badge\">Туда · куплено</span><div class=\"lbl\" style=\"margin-top:10px\">Фирменный «Северная Пальмира» · двухэтажный</div>\n<div class=\"route\"><div><div class=\"t\">20:05</div><div class=\"lbl\">Пт 23.10</div></div><div class=\"ln\"></div><div style=\"text-align:right\"><div class=\"t\">06:41</div><div class=\"lbl\">Сб 24.10</div></div></div>\n<div style=\"display:flex;justify-content:space-between;font-size:14px;gap:10px\"><span>Санкт-Петербург<br><small style=\"color:var(--mut)\">Московский вокзал</small></span><span style=\"text-align:right\">Рязань-2<br><small style=\"color:var(--mut)\"></small></span></div>\n<p style=\"font-size:13px;margin:12px 0 0;color:var(--mut)\">Вагон 08 · купе фирменный (2Т) · место 104, верхнее, 2-й этаж · питание и бельё включены · <a href=\"https://rasp.yandex.ru/thread/R_035A_112?departure_from=2026-10-23+20%3A05%3A00&station_from=9602494&station_to=9600746&to_city=1\">расписание</a></p></div>\n<div class=\"stub\"><div><div class=\"lbl\" style=\"color:#d8d0bd\">Поезд</div><div class=\"num\">035А</div></div><div><div class=\"lbl\" style=\"color:#d8d0bd\">В пути</div><b>10 ч 36 мин</b></div><div><div class=\"lbl\" style=\"color:#d8d0bd\">Цена</div><b>6 255,20 ₽</b></div></div></div><div class=\"pass rv\"><div class=\"main\"><span class=\"badge\">Обратно · куплено</span><div class=\"lbl\" style=\"margin-top:10px\">ФПК, Горьковский филиал</div>\n<div class=\"route\"><div><div class=\"t\">17:49</div><div class=\"lbl\">Пт 30.10</div></div><div class=\"ln\"></div><div style=\"text-align:right\"><div class=\"t\">06:54</div><div class=\"lbl\">Сб 31.10</div></div></div>\n<div style=\"display:flex;justify-content:space-between;font-size:14px;gap:10px\"><span>Владимир<br><small style=\"color:var(--mut)\">Пассажирский, ул. Вокзальная, 2</small></span><span style=\"text-align:right\">Санкт-Петербург<br><small style=\"color:var(--mut)\">Ладожский вокзал</small></span></div>\n<p style=\"font-size:13px;margin:12px 0 0;color:var(--mut)\">Вагон 16 · плацкарт (3Э) · место 023, нижнее · бельё включено, питания нет (есть вагон-ресторан / буфет)</p></div>\n<div class=\"stub\"><div><div class=\"lbl\" style=\"color:#d8d0bd\">Поезд</div><div class=\"num\">131Г</div></div><div><div class=\"lbl\" style=\"color:#d8d0bd\">В пути</div><b>13 ч 05 мин</b></div><div><div class=\"lbl\" style=\"color:#d8d0bd\">Цена</div><b>3 322,00 ₽</b></div></div></div><div class=\"box rv\" style=\"display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px\"><span>Итого за билеты на одного</span><b style=\"font-family:'Playfair Display',serif;font-size:28px;color:var(--g)\">9 577,20 ₽</b></div>\n<p class=\"sub rv\" style=\"margin:0\">Вернуть билет можно онлайн до отправления поезда.</p></div>",
  "checklist": [
+  "<b>✓ Экскурсия в Константиново забронирована:</b> 25.10, 15:00–16:00",
   "Купить билет Рязань → Владимир на 29.10 (037С, 22:49)",
   "Забронировать жильё в Рязани (24–27 и 28–29.10)",
   "Паспорт, билеты офлайн",
