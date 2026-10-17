@@ -56,7 +56,9 @@ def fcard(p):
     q=''.join(f'<blockquote>{x}</blockquote>' for x in p.get('quotes',[]))
     ph=f'<figure class="fig"><img src="{p["photo"]}" alt="{p["name"]}" loading="lazy"><figcaption>{p["photo_cap"]}</figcaption></figure>' if p.get('photo') else f'<figure class="fig"><div class="ico">{p.get("icon","🍴")}</div></figure>'
     return f'<div class="fc rv">{ph}<div class="fb"><h3>{p["name"]}{tag}</h3><div class="rt">★ {p.get("rating","рейтинг не найден")}</div><p class="why">{p["why"]}</p>{dish}{q}<p class="meta">📍 {p["addr"]}{" (на карте примерно)" if p.get("approx") else ""}<br>🕒 {p["hours"]}<br>💳 {p["check"]}{lk}</p></div></div>'
-fs=''.join(f'<section><h2 class="rv" style="font-size:30px">{g}</h2><div class="fgrid">{"".join(fcard(p) for p in L)}</div></section>' for g,L in D['food'])
+FI=D.get('food_intro')
+intro=(f'<section id="taste"><h2 class="rv" style="font-size:30px">Что попробовать: кухня Рязанщины и Владимирской земли</h2><p class="rv" style="max-width:760px">{FI["history"]}</p><div class="tgrid">'+''.join(f'<div class="tc rv"><div class="ti">{i}</div><div><h3>{t}</h3><p>{w}</p><p class="where">📍 {wh}</p>{f"<p class=wk>⚠ {n}</p>" if n else ""}</div></div>' for i,t,w,wh,n in FI['cards'])+f'</div><p class="src rv">{FI["sources"]}</p></section>') if FI else ''
+fs=intro+''.join(f'<section><h2 class="rv" style="font-size:30px">{g}</h2><div class="fgrid">{"".join(fcard(p) for p in L)}</div></section>' for g,L in D['food'])
 page('food.html','Где поесть',head('Где поесть','Недорого и по-местному. ✓ — часы проверены по сайту или справочнику; перед походом уточняйте. Средний чек на одного.')+f'<div class="wrap">{fs}<section><h2 class="rv" style="font-size:28px">На карте</h2><div class="mini rv" data-map="food" style="height:380px"></div></section></div>','food.html',True)
 cl=''.join(f'<label><input type="checkbox"><span>{x}</span></label>' for x in D['checklist'])
 rd=''.join(f'<label><input type="checkbox"><span>{x}</span></label>' for x in D.get('reading',[]))
