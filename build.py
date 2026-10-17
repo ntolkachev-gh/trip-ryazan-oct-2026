@@ -27,7 +27,7 @@ strip=''.join(f'<a class="sd rv" href="{dlink(d)}" style="background-image:url(i
 tiles=[('tickets.html','🎫','Билеты','Оба поезда куплены'),('plan.html','🗓️','План','Рязань, Константиново, Мещёра, Суздаль, Владимир'),('map.html','🗺️','Карта','Все точки, фильтр по дням'),('checklist.html','✅','Чек-лист','Сборы и полезные ссылки'),('diary.html','📔','Дневник','Заметки и фото из поездки')]
 page('index.html','Главная',f'''<header class="hero"><div class="in"><div class="kick">Осеннее путешествие · черновик</div><h1>Рязань <i>и Владимир</i></h1><p>{D["dates"]}</p></div></header>
 <div class="wrap"><div class="note rv">{D["note"]}</div>
-<section><h2 class="rv">Коротко</h2><p class="sub rv">Ночным поездом в Рязань, неделя по городу и области: кремль, Есенинское Константиново, Мещёра, Окский заповедник с зубрами, затем ночным поездом в Суздаль и Владимир. Из Владимира, оттуда ночным поездом 30→31 октября в Петербург.</p>
+<section><h2 class="rv">Коротко</h2><p class="sub rv">Ночным поездом в Рязань: кремль, есенинское Константиново, Мещёра и Окский заповедник с зубрами. Затем ночным поездом во Владимир, два дня в Суздале и день во Владимире. Обратно из Владимира ночным поездом 30→31 октября.</p>
 <div class="grid">{''.join(f'<a class="tile rv" href="{h}"><div class="ic">{i}</div><h3>{t}</h3><p>{p}</p></a>' for h,i,t,p in tiles)}</div></section>
 <section><h2 class="rv">7 дней</h2><p class="sub rv">Нажмите на день, чтобы открыть подробный план.</p><div class="strip">{strip}</div></section></div>''','index.html')
 page('tickets.html','Билеты',head('Билеты','Оба билета куплены.')+f'''<div class="wrap"><section>{D["ticket_html"].replace('href="#return"','href="#return"')}</section></div>''','tickets.html')
