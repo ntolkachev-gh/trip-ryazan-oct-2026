@@ -4,6 +4,28 @@ import json,os
 D=json.load(open('data.json',encoding='utf8'))
 NAV=[('index.html','Главная'),('tickets.html','Билеты'),('plan.html','План'),('map.html','Карта'),('food.html','Еда'),('cuisine.html','Кухня'),('checklist.html','Чек-лист'),('diary.html','Дневник'),('guide.html','Путеводитель')]
 WD={'2026-10-24':'Сб','2026-10-25':'Вс','2026-10-26':'Пн','2026-10-27':'Вт','2026-10-28':'Ср','2026-10-29':'Чт','2026-10-30':'Пт'}
+W=json.load(open('weather.json')) if os.path.exists('weather.json') else {'days':{}}
+WMO={0:('☀️','ясно'),1:('🌤','преимущественно ясно'),2:('⛅','переменная облачность'),3:('☁️','пасмурно'),45:('🌫','туман'),48:('🌫','изморозь, туман'),51:('🌦','слабая морось'),53:('🌦','морось'),55:('🌧','сильная морось'),56:('🌧','ледяная морось'),57:('🌧','ледяная морось'),61:('🌧','небольшой дождь'),63:('🌧','дождь'),65:('🌧','сильный дождь'),66:('🌧','ледяной дождь'),67:('🌧','ледяной дождь'),71:('🌨','небольшой снег'),73:('🌨','снег'),75:('❄️','сильный снег'),77:('🌨','снежная крупа'),80:('🌦','ливень'),81:('🌧','ливни'),82:('⛈','сильный ливень'),85:('🌨','снегопад'),86:('❄️','сильный снегопад'),95:('⛈','гроза'),96:('⛈','гроза с градом'),99:('⛈','гроза с градом')}
+WUPD=f'Обновлено: {W.get("fetched_at","—")} МСК · <a href="https://open-meteo.com/">Open-Meteo</a>'
+def wx(date): return W['days'].get(date)
+def wchip(date):
+    w=wx(date)
+    if not w: return '<span class="chip wxc">🌡 прогноз позже</span>'
+    return f'<span class="chip wxc">{WMO.get(w["weather_code"],("🌡",""))[0]} {round(w["temperature_2m_max"])}°/{round(w["temperature_2m_min"])}°</span>'
+def hint(w):
+    lo,hi=w['temperature_2m_min'],w['temperature_2m_max'];h=[]
+    h.append('тёплая куртка, шапка и перчатки' if lo<3 else 'тёплая куртка' if hi<10 else 'лёгкая куртка или свитер')
+    if (w['precipitation_probability_max'] or 0)>=40 or (w['precipitation_sum'] or 0)>=1: h.append('зонт и непромокаемая обувь')
+    if w['wind_speed_10m_max']/3.6>=8: h.append('ветровка — ветрено')
+    return ', '.join(h).capitalize()
+def wcard(date):
+    w=wx(date)
+    if not w: return f'<div class="box wx rv"><b>🌡 Погода</b><p>Прогноз появится ближе к дате.</p><p class="wu">{WUPD}</p></div>'
+    e,t=WMO.get(w['weather_code'],('🌡','—'))
+    return (f'<div class="box wx rv"><div class="wi">{e}</div><div><b>Погода · {w["place"]}: {t}</b>'
+      f'<p class="wt">{round(w["temperature_2m_min"])}…{round(w["temperature_2m_max"])} °C</p>'
+      f'<p>☔ {w["precipitation_probability_max"]}% · {w["precipitation_sum"]} мм · 💨 до {w["wind_speed_10m_max"]/3.6:.0f} м/с · 🌅 {w["sunrise"][-5:]} · 🌇 {w["sunset"][-5:]}</p>'
+      f'<p>👕 {hint(w)}</p><p class="wu">Прогноз, может измениться. {WUPD}</p></div></div>')
 def chips(c): return ''.join(f'<span class="chip{" t" if x.startswith("!") else ""}">{x.lstrip("!")}</span>' for x in c)
 def page(path,title,body,active,needmap=False):
     r='../'*path.count('/')
@@ -26,7 +48,7 @@ FOODPTS=[dict(name=p['name'],addr=p['addr'],lat=p['lat'],lon=p['lon']) for g,L i
 HOTEL=f'''<section id="stay"><h2 class="rv">Жильё</h2><div class="box rv"><span class="badge b-o">Почти решено</span><h3 style="color:var(--g);font-size:24px;margin:8px 0 4px">🏨 {H['name']}</h3><p style="margin:0"><b>{H['addr']}</b> · {H['dates']}</p><p style="color:var(--mut)">{H['info']}</p><p><a href="tel:{H['phone'].replace(' ','')}">{H['phone']}</a> · <a href="{H['url']}">Островок</a></p></div></section>'''
 def stt(d): return '<span class="st ok">✓ подтверждено</span>' if d.get('status')=='confirmed' else '<span class="st">черновик</span>'
 def dlink(d): return f'day/{d["date"][-2:]}.html'
-strip=''.join(f'<a class="sd rv" href="{dlink(d)}" style="background-image:url(img/{d["img"]}.jpg)"><span><b>{d["dt"]}</b>{d["title"]}<br>{stt(d)}</span></a>' for d in days)
+strip=''.join(f'<a class="sd rv" href="{dlink(d)}" style="background-image:url(img/{d["img"]}.jpg)"><span><b>{d["dt"]}</b>{d["title"]}<br>{stt(d)} {wchip(d["date"])}</span></a>' for d in days)
 tiles=[('tickets.html','🎫','Билеты','Оба поезда куплены'),('plan.html','🗓️','План','Рязань, Константиново, Мещёра, Суздаль, Владимир'),('map.html','🗺️','Карта','Все точки, фильтр по дням'),('checklist.html','✅','Чек-лист','Сборы и полезные ссылки'),('diary.html','📔','Дневник','Заметки и фото из поездки')]
 page('index.html','Главная',f'''<header class="hero"><div class="in"><div class="kick">Осеннее путешествие · черновик</div><h1>Рязань <i>и Владимир</i></h1><p>{D["dates"]}</p></div></header>
 <div class="wrap"><div class="note rv">{D["note"]}</div>
@@ -34,7 +56,7 @@ page('index.html','Главная',f'''<header class="hero"><div class="in"><div
 <div class="grid">{''.join(f'<a class="tile rv" href="{h}"><div class="ic">{i}</div><h3>{t}</h3><p>{p}</p></a>' for h,i,t,p in tiles)}</div></section>
 <section><h2 class="rv">7 дней</h2><p class="sub rv">Нажмите на день, чтобы открыть подробный план.</p><div class="strip">{strip}</div></section></div>''','index.html')
 page('tickets.html','Билеты',head('Билеты','Оба билета куплены.')+f'''<div class="wrap"><section>{D["ticket_html"].replace('href="#return"','href="#return"')}</section>{HOTEL}</div>''','tickets.html')
-tl=''.join(f'<div class="day rv"><div class="dot">{d["n"]}</div><div class="ph" style="background-image:url(img/{d["img"]}.jpg)"></div><div class="bd"><div class="dt">{d["dt"]} {stt(d)}</div><h3>{d["title"]}</h3><div class="chips">{chips(d["chips"])}</div><p style="margin:6px 0 0;font-size:15px">{d["items"][0] if d["n"]!=1 else d["items"][1]}</p><a class="more" href="{dlink(d)}">Подробнее о дне →</a></div></div>' for d in days)
+tl=''.join(f'<div class="day rv"><div class="dot">{d["n"]}</div><div class="ph" style="background-image:url(img/{d["img"]}.jpg)"></div><div class="bd"><div class="dt">{d["dt"]} {stt(d)}</div><h3>{d["title"]}</h3><div class="chips">{wchip(d["date"])}{chips(d["chips"])}</div><p style="margin:6px 0 0;font-size:15px">{d["items"][0] if d["n"]!=1 else d["items"][1]}</p><a class="more" href="{dlink(d)}">Подробнее о дне →</a></div></div>' for d in days)
 bk=''.join(f'<div class="tile rv" style="cursor:default"><h3>{t}</h3><p style="color:var(--ink)">{a}</p><p style="margin-top:8px">{b}</p></div>' for t,a,b in D.get('backups',[]))
 page('plan.html','План',head('План по дням (черновик)','7 дней, база в Рязани рядом с центром или Рязанью-2, 3 ночи в Рязани, ночь 27→28 в поезде до Владимира, Суздаль и Владимир. Учтены выходные музеев.')+f'<div class="wrap"><section><div class="tl">{tl}</div></section><section id="backup"><h2 class="rv">Запасные варианты</h2><p class="sub rv">Всё, что не вошло в основной план.</p><div class="grid">{bk}</div></section></div>','plan.html')
 for i,d in enumerate(days):
@@ -42,7 +64,7 @@ for i,d in enumerate(days):
     nx=f'<a class="nx" href="{days[i+1]["date"][-2:]}.html">{days[i+1]["dt"]} →<br><b>{days[i+1]["title"]}</b></a>' if i<len(days)-1 else '<a class="nx" href="../tickets.html">Билеты →</a>'
     diary=d.get('diary') or '<div class="diary">Здесь появятся заметки и фото из поездки</div>'
     page(f'day/{d["date"][-2:]}.html',d['dt']+' · '+d['title'],f'''<header class="phead" style="background-image:url(img/{d["img"]}.jpg)"><div class="in"><div class="kick">День {d["n"]} · {d["dt"]} · {"✓ подтверждено" if d.get("status")=="confirmed" else "черновик"}</div><h1>{d["title"]}</h1></div></header>
-<div class="wrap"><section><div class="chips rv">{chips(d["chips"])}</div><div class="box rv"><h2 style="font-size:26px">План</h2><ul>{''.join(f"<li>{x}</li>" for x in d["items"])}</ul></div></section>
+<div class="wrap"><section>{wcard(d["date"])}<div class="chips rv">{chips(d["chips"])}</div><div class="box rv"><h2 style="font-size:26px">План</h2><ul>{''.join(f"<li>{x}</li>" for x in d["items"])}</ul></div></section>
 <section><h2 class="rv" style="font-size:28px">Точки дня</h2><div class="mini rv" data-map="{d["n"]}"></div></section>
 <section id="was"><h2 class="rv" style="font-size:28px">Как было</h2>{diary}</section>
 <div class="pn">{pv}{nx}</div></div>''','plan.html',True)

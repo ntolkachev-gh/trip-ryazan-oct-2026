@@ -15,3 +15,9 @@
 
 ## Путеводитель (guide.html)
 Данные — поле `guide` в data.json: `draft`, `intro`, `route`, `days`, `season`, `chapters[]` (id, title, img, days, intro, see[], how, eat[], photo[], tips[]), `extra`, `practical` (trains, budget, pack, apps). Ссылки на карточки: `food.html#<id>` (поле `id` у мест в `food` и `book_spots`). Блок «Наше мнение после поездки» пока заглушка — чтобы заполнить, добавьте в главу поля и выведите их в build.py. Затем `python3 build.py`.
+
+## Погода
+`./update_and_publish.sh` — одна команда раз в день: `update_weather.py` берёт прогноз Open-Meteo (без ключа) по точкам каждого дня → `weather.json` (fetched_at МСК, source), затем `build.py` и commit/push только при изменениях (`weather: <дата>`). Нужен `$GITHUB_TOKEN` в окружении (не печатается).
+- Ошибка или дата за горизонтом прогноза → остаются прежние данные или надпись «прогноз появится ближе к дате».
+- Прошедшие дни не перезаписываются; после 31.10.2026 файл заморожен целиком.
+- Отображение: карточка на странице дня, чипы на главной и в плане. Коды WMO и подсказки по одежде — в build.py.
