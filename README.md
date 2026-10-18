@@ -12,3 +12,6 @@
 1. Отредактировать `data.json`. Для дневника заполнить поле `diary` нужного дня (HTML, можно `<p>` и `<img src="img/...">`).
 2. `python3 build.py`
 3. `git commit -am "..." && git push`
+
+## Путеводитель (guide.html)
+Данные — поле `guide` в data.json: `draft`, `intro`, `route`, `days`, `season`, `chapters[]` (id, title, img, days, intro, see[], how, eat[], photo[], tips[]), `extra`, `practical` (trains, budget, pack, apps). Ссылки на карточки: `food.html#<id>` (поле `id` у мест в `food` и `book_spots`). Блок «Наше мнение после поездки» пока заглушка — чтобы заполнить, добавьте в главу поля и выведите их в build.py. Затем `python3 build.py`.

@@ -2,7 +2,7 @@
 """Генерирует все страницы сайта из data.json. Запуск: python3 build.py"""
 import json,os
 D=json.load(open('data.json',encoding='utf8'))
-NAV=[('index.html','Главная'),('tickets.html','Билеты'),('plan.html','План'),('map.html','Карта'),('food.html','Еда'),('cuisine.html','Кухня'),('checklist.html','Чек-лист'),('diary.html','Дневник')]
+NAV=[('index.html','Главная'),('tickets.html','Билеты'),('plan.html','План'),('map.html','Карта'),('food.html','Еда'),('cuisine.html','Кухня'),('checklist.html','Чек-лист'),('diary.html','Дневник'),('guide.html','Путеводитель')]
 WD={'2026-10-24':'Сб','2026-10-25':'Вс','2026-10-26':'Пн','2026-10-27':'Вт','2026-10-28':'Ср','2026-10-29':'Чт','2026-10-30':'Пт'}
 def chips(c): return ''.join(f'<span class="chip{" t" if x.startswith("!") else ""}">{x.lstrip("!")}</span>' for x in c)
 def page(path,title,body,active,needmap=False):
@@ -55,7 +55,7 @@ def fcard(p):
     dish=f'<p><b>Попробовать:</b> {p["dish"]}</p>' if p.get('dish') else ''
     q=''.join(f'<blockquote>{x}</blockquote>' for x in p.get('quotes',[]))
     ph=f'<figure class="fig"><img src="{p["photo"]}" alt="{p["name"]}" loading="lazy"><figcaption>{p["photo_cap"]}</figcaption></figure>' if p.get('photo') else f'<figure class="fig"><div class="ico">{p.get("icon","🍴")}</div></figure>'
-    return f'<div class="fc rv">{ph}<div class="fb"><h3>{p["name"]}{tag}</h3><div class="rt">★ {p.get("rating","рейтинг не найден")}</div><p class="why">{p["why"]}</p>{dish}{q}<p class="meta">📍 {p["addr"]}{" (на карте примерно)" if p.get("approx") else ""}<br>🕒 {p["hours"]}<br>💳 {p["check"]}{lk}</p></div></div>'
+    return f'<div class="fc rv"'+(f' id="{p["id"]}"' if p.get('id') else '')+f'>{ph}<div class="fb"><h3>{p["name"]}{tag}</h3><div class="rt">★ {p.get("rating","рейтинг не найден")}</div><p class="why">{p["why"]}</p>{dish}{q}<p class="meta">📍 {p["addr"]}{" (на карте примерно)" if p.get("approx") else ""}<br>🕒 {p["hours"]}<br>💳 {p["check"]}{lk}</p></div></div>'
 FI=D.get('food_intro')
 intro=(f'<section id="taste"><h2 class="rv" style="font-size:30px">Что попробовать: кухня Рязанщины и Владимирской земли</h2><p class="rv" style="max-width:760px">{FI["history"]}</p><div class="tgrid">'+''.join(f'<div class="tc rv"><div class="ti">{i}</div><div><h3>{t}</h3><p>{w}</p><p class="where">📍 {wh}</p>{f"<p class=wk>⚠ {n}</p>" if n else ""}</div></div>' for i,t,w,wh,n in FI['cards'])+f'</div><p class="src rv">{FI["sources"]}</p></section>') if FI else ''
 BS=D.get('book_spots')
@@ -70,4 +70,20 @@ page('checklist.html','Чек-лист',head('Чек-лист','Отметки �
 dl=''.join(f'<a class="rv" href="{dlink(d)}#was"><div class="th" style="background-image:url(img/{d["img"]}.jpg)"></div><div><b>{d["dt"]} · {d["title"]}</b><br>{stt(d)} <small>{"Есть заметки" if d.get("diary") else "Пока пусто"}</small></div></a>' for d in days)
 page('diary.html','Дневник',head('Дневник','Заполняется во время и после поездки.')+f'<div class="wrap"><section><div class="dl">{dl}</div></section></div>','diary.html')
 page('cuisine.html','Кухня',head('Кухня','Что попробовать на Рязанщине и во Владимирской земле.')+f'<div class="wrap">{intro}<section><a class="rv" href="food.html">← Где поесть</a></section></div>','cuisine.html')
+G=D.get('guide')
+if G:
+    ul=lambda L:'<ul>'+''.join(f'<li>{x}</li>' for x in L)+'</ul>'
+    def chap(c):
+        ph=('<h3>Для фото / книжного блога</h3>'+ul(c['photo'])) if c['photo'] else ''
+        return (f'<section class="gch" id="{c["id"]}"><figure class="fig rv"><img src="img/{c["img"]}.jpg" alt="{c["title"]}" loading="lazy"></figure>'
+          f'<h2 class="rv">{c["title"]} <small>· {c["days"]}</small></h2><p class="rv">{c["intro"]}</p>'
+          f'<h3>Что посмотреть</h3>{ul(c["see"])}<h3>Как добраться</h3><p>{c["how"]}</p><h3>Где поесть</h3>{ul(c["eat"])}{ph}'
+          f'<h3>Наши советы</h3>{ul(c["tips"])}<div class="op"><b>Наше мнение после поездки</b><div class="stars">☆☆☆☆☆</div><p>Допишем в поездке.</p></div></section>')
+    toc='<a href="#intro">Вступление</a>'+''.join(f'<a href="#{c["id"]}">{c["title"]}</a>' for c in G['chapters'])+'<a href="#extra">Ещё день</a><a href="#practical">Практическое</a>'
+    P=G['practical']
+    pr=f'<section class="gch" id="practical"><h2 class="rv">Практическое</h2><h3>Поезда</h3>{ul(P["trains"])}<h3>Бюджет на сейчас</h3>{ul(P["budget"])}<h3>Что взять в конце октября</h3>{ul(P["pack"])}<h3>Приложения</h3>{ul(P["apps"])}</section>'
+    gi=f'<section class="gch" id="intro"><p class="draft">✎ {G["draft"]}</p><h2 class="rv">Путеводитель от нас</h2><p>{G["intro"]}</p><h3>Маршрут</h3><p>{G["route"]}</p><h3>Сколько дней</h3><p>{G["days"]}</p><h3>Когда ехать</h3><p>{G["season"]}</p></section>'
+    ex=f'<section class="gch" id="extra"><h2 class="rv">Если есть ещё день</h2><p>{G["extra"]}</p></section>'
+    page('guide.html','Путеводитель',head('Путеводитель','Рязань, Мещёра, Суздаль и Владимир: наш маршрут для друзей. Черновик до поездки.')+f'<div class="wrap"><div class="gl"><aside class="toc">{toc}</aside><div>{gi}{"".join(chap(c) for c in G["chapters"])}{ex}{pr}</div></div></div>','guide.html')
 print('ok')
+
