@@ -82,7 +82,7 @@
     "Окский заповедник (Брыкин Бор): визит-центр и музей природы ежедневно 10:00–16:00, зубровый питомник только с экскурсоводом; для групп меньше 10 человек запись не нужна (<a href=\"http://oksky-reserve.ru/visit/information/\">oksky-reserve.ru</a>).",
     "По пути городище Старой Рязани (под открытым небом) и, если успеваем, набережная Оки в Спасске-Рязанском.",
     "Вечером забрать вещи в Рязани, ужин.",
-    "<b>22:49 поезд 037С</b> Рязань-2 → Владимир 06:05 (ср). Купе от ~3 813 ₽, плацкарт от ~2 484 ₽ на одного (Яндекс Расписания 17.10: время ✓, цена ориентир). Нужно купить 2 билета."
+    "<b>22:49 поезд 037С</b> Рязань-2 → Владимир 06:05 (ср). Купе от ~3 813 ₽, плацкарт от ~2 484 ₽ на одного (Яндекс Расписания 17.10: время ✓, цена ориентир)."
    ],
    "diary": ""
   },
@@ -282,17 +282,9 @@
  },
  "ticket_html": "<div style=\"display:grid;gap:22px\"><div class=\"pass rv\"><div class=\"main\"><span class=\"badge\">Туда · куплено</span><div class=\"lbl\" style=\"margin-top:10px\">Фирменный «Северная Пальмира» · двухэтажный</div>\n<div class=\"route\"><div><div class=\"t\">20:05</div><div class=\"lbl\">Пт 23.10</div></div><div class=\"ln\"></div><div style=\"text-align:right\"><div class=\"t\">06:41</div><div class=\"lbl\">Сб 24.10</div></div></div>\n<div style=\"display:flex;justify-content:space-between;font-size:14px;gap:10px\"><span>Санкт-Петербург<br><small style=\"color:var(--mut)\">Московский вокзал</small></span><span style=\"text-align:right\">Рязань-2<br><small style=\"color:var(--mut)\"></small></span></div>\n<p style=\"font-size:13px;margin:12px 0 0;color:var(--mut)\">Вагон 08 · купе фирменный (2Т) · место 104, верхнее, 2-й этаж · питание и бельё включены · <a href=\"https://rasp.yandex.ru/thread/R_035A_112?departure_from=2026-10-23+20%3A05%3A00&station_from=9602494&station_to=9600746&to_city=1\">расписание</a></p></div>\n<div class=\"stub\"><div><div class=\"lbl\" style=\"color:#d8d0bd\">Поезд</div><div class=\"num\">035А</div></div><div><div class=\"lbl\" style=\"color:#d8d0bd\">В пути</div><b>10 ч 36 мин</b></div><div><div class=\"lbl\" style=\"color:#d8d0bd\">Цена</div><b>6 255,20 ₽</b></div></div></div><div class=\"pass rv\"><div class=\"main\"><span class=\"badge\">Обратно · куплено</span><div class=\"lbl\" style=\"margin-top:10px\">ФПК, Горьковский филиал</div>\n<div class=\"route\"><div><div class=\"t\">17:49</div><div class=\"lbl\">Пт 30.10</div></div><div class=\"ln\"></div><div style=\"text-align:right\"><div class=\"t\">06:54</div><div class=\"lbl\">Сб 31.10</div></div></div>\n<div style=\"display:flex;justify-content:space-between;font-size:14px;gap:10px\"><span>Владимир<br><small style=\"color:var(--mut)\">Пассажирский, ул. Вокзальная, 2</small></span><span style=\"text-align:right\">Санкт-Петербург<br><small style=\"color:var(--mut)\">Ладожский вокзал</small></span></div>\n<p style=\"font-size:13px;margin:12px 0 0;color:var(--mut)\">Вагон 16 · плацкарт (3Э) · место 023, нижнее · бельё включено, питания нет (есть вагон-ресторан / буфет)</p></div>\n<div class=\"stub\"><div><div class=\"lbl\" style=\"color:#d8d0bd\">Поезд</div><div class=\"num\">131Г</div></div><div><div class=\"lbl\" style=\"color:#d8d0bd\">В пути</div><b>13 ч 05 мин</b></div><div><div class=\"lbl\" style=\"color:#d8d0bd\">Цена</div><b>3 322,00 ₽</b></div></div></div><div class=\"box rv\" style=\"display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px\"><span>Итого за билеты на одного</span><b style=\"font-family:'Playfair Display',serif;font-size:28px;color:var(--g)\">9 577,20 ₽</b></div>\n<p class=\"sub rv\" style=\"margin:0\">Вернуть билет можно онлайн до отправления поезда.</p></div>",
  "checklist": [
-  "<b>✓ Экскурсия в Константиново забронирована:</b> 25.10, 15:00–16:00",
-  "Купить 2 билета на 037С: 27.10, 22:49 Рязань-2 → Владимир",
-  "Забронировать «Пушкин» 24–27.10",
-  "Позвонить в отель (+7 910 620-17-77): вещи в 07:00, ранний заезд, трансфер от Рязани-2",
-  "Жильё в Суздале на 28.10",
-  "Жильё во Владимире на 29.10 (или вторая ночь в Суздале)",
   "Паспорт, билеты офлайн",
   "Тёплая непромокаемая куртка, шапка, удобная обувь для грязи",
-  "Зонт, пауэрбанк, наличные на автобусы и рынки",
-  "Окский заповедник: выбрать время экскурсии (10:30 / 12:30 / 14:30)",
-  "Помнить: вернуть билеты можно онлайн до отправления"
+  "Зонт, пауэрбанк, наличные на автобусы и рынки"
  ],
  "links": [
   {
