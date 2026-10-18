@@ -26,6 +26,9 @@ def wcard(date):
       f'<p class="wt">{round(w["temperature_2m_min"])}…{round(w["temperature_2m_max"])} °C</p>'
       f'<p>☔ {w["precipitation_probability_max"]}% · {w["precipitation_sum"]} мм · 💨 до {w["wind_speed_10m_max"]/3.6:.0f} м/с · 🌅 {w["sunrise"][-5:]} · 🌇 {w["sunset"][-5:]}</p>'
       f'<p>👕 {hint(w)}</p><p class="wu">Прогноз, может измениться. {WUPD}</p></div></div>')
+PA=D.get('photo_album')
+PACARD=f'<a class="pa rv" href="{PA["url"]}" target="_blank" rel="noopener"><span class="pai">📷</span><span><b>{PA["title"][2:]}</b><br><small>{PA["sub"]}</small></span><span class="paa">→</span></a>' if PA else ''
+PALINK=f'<p class="pal"><a href="{PA["url"]}" target="_blank" rel="noopener">📷 Все фото — в фотопотоке поездки →</a></p>' if PA else ''
 def chips(c): return ''.join(f'<span class="chip{" t" if x.startswith("!") else ""}">{x.lstrip("!")}</span>' for x in c)
 def page(path,title,body,active,needmap=False):
     r='../'*path.count('/')
@@ -54,7 +57,7 @@ page('index.html','Главная',f'''<header class="hero"><div class="in"><div
 <div class="wrap"><div class="note rv">{D["note"]}</div>
 <section><h2 class="rv">Коротко</h2><p class="sub rv">Ночным поездом в Рязань: кремль, есенинское Константиново, Мещёра и Окский заповедник с зубрами. Затем ночным поездом во Владимир, два дня в Суздале и день во Владимире. Обратно из Владимира ночным поездом 30→31 октября.</p>
 <div class="grid">{''.join(f'<a class="tile rv" href="{h}"><div class="ic">{i}</div><h3>{t}</h3><p>{p}</p></a>' for h,i,t,p in tiles)}</div></section>
-<section><h2 class="rv">7 дней</h2><p class="sub rv">Нажмите на день, чтобы открыть подробный план.</p><div class="strip">{strip}</div></section></div>''','index.html')
+<section><h2 class="rv">7 дней</h2><p class="sub rv">Нажмите на день, чтобы открыть подробный план.</p><div class="strip">{strip}</div></section><section>{PACARD}</section></div>''','index.html')
 page('tickets.html','Билеты',head('Билеты','Оба билета куплены.')+f'''<div class="wrap"><section>{D["ticket_html"].replace('href="#return"','href="#return"')}</section>{HOTEL}</div>''','tickets.html')
 tl=''.join(f'<div class="day rv"><div class="dot">{d["n"]}</div><div class="ph" style="background-image:url(img/{d["img"]}.jpg)"></div><div class="bd"><div class="dt">{d["dt"]} {stt(d)}</div><h3>{d["title"]}</h3><div class="chips">{wchip(d["date"])}{chips(d["chips"])}</div><p style="margin:6px 0 0;font-size:15px">{d["items"][0] if d["n"]!=1 else d["items"][1]}</p><a class="more" href="{dlink(d)}">Подробнее о дне →</a></div></div>' for d in days)
 bk=''.join(f'<div class="tile rv" style="cursor:default"><h3>{t}</h3><p style="color:var(--ink)">{a}</p><p style="margin-top:8px">{b}</p></div>' for t,a,b in D.get('backups',[]))
@@ -66,7 +69,7 @@ for i,d in enumerate(days):
     page(f'day/{d["date"][-2:]}.html',d['dt']+' · '+d['title'],f'''<header class="phead" style="background-image:url(img/{d["img"]}.jpg)"><div class="in"><div class="kick">День {d["n"]} · {d["dt"]} · {"✓ подтверждено" if d.get("status")=="confirmed" else "черновик"}</div><h1>{d["title"]}</h1></div></header>
 <div class="wrap"><section>{wcard(d["date"])}<div class="chips rv">{chips(d["chips"])}</div><div class="box rv"><h2 style="font-size:26px">План</h2><ul>{''.join(f"<li>{x}</li>" for x in d["items"])}</ul></div></section>
 <section><h2 class="rv" style="font-size:28px">Точки дня</h2><div class="mini rv" data-map="{d["n"]}"></div></section>
-<section id="was"><h2 class="rv" style="font-size:28px">Как было</h2>{diary}</section>
+<section id="was"><h2 class="rv" style="font-size:28px">Как было</h2>{diary}{PALINK}</section>
 <div class="pn">{pv}{nx}</div></div>''','plan.html',True)
 flt=''.join(f'<button class="on" data-d="{k}" style="--c:{D["colors"][k]}">{k} · {v}</button>' for k,v in D['legend'].items())+'<button class="on" data-d="food" style="--c:#c8641e">🍴 Еда и жильё</button>'
 page('map.html','Карта',head('Карта','Цвет и номер метки — день поездки. Нажмите на день, чтобы скрыть или показать его точки.')+f'<div class="wrap"><section><div class="flt">{flt}</div><div id="bigmap" data-map="all"></div></section></div>','map.html',True)
@@ -90,7 +93,7 @@ rd=''.join(f'<label><input type="checkbox"><span>{x}</span></label>' for x in D.
 lk=''.join(f'<a href="{l["url"]}">{l["title"]}</a>' for l in D['links'])
 page('checklist.html','Чек-лист',head('Чек-лист','Отметки сохраняются в этом браузере.')+f'<div class="wrap"><section><div class="cl rv">{cl}</div></section><section><h2 class="rv">Посмотреть и почитать перед поездкой</h2><div class="cl rv">{rd}</div></section><section><h2 class="rv">Полезные ссылки</h2><div class="links rv">{lk}</div></section></div>','checklist.html')
 dl=''.join(f'<a class="rv" href="{dlink(d)}#was"><div class="th" style="background-image:url(img/{d["img"]}.jpg)"></div><div><b>{d["dt"]} · {d["title"]}</b><br>{stt(d)} <small>{"Есть заметки" if d.get("diary") else "Пока пусто"}</small></div></a>' for d in days)
-page('diary.html','Дневник',head('Дневник','Заполняется во время и после поездки.')+f'<div class="wrap"><section><div class="dl">{dl}</div></section></div>','diary.html')
+page('diary.html','Дневник',head('Дневник','Заполняется во время и после поездки.')+f'<div class="wrap"><section>{PACARD}</section><section><div class="dl">{dl}</div></section></div>','diary.html')
 page('cuisine.html','Кухня',head('Кухня','Что попробовать на Рязанщине и во Владимирской земле.')+f'<div class="wrap">{intro}<section><a class="rv" href="food.html">← Где поесть</a></section></div>','cuisine.html')
 G=D.get('guide')
 if G:
@@ -104,7 +107,7 @@ if G:
     toc='<a href="#intro">Вступление</a>'+''.join(f'<a href="#{c["id"]}">{c["title"]}</a>' for c in G['chapters'])+'<a href="#extra">Ещё день</a><a href="#practical">Практическое</a>'
     P=G['practical']
     pr=f'<section class="gch" id="practical"><h2 class="rv">Практическое</h2><h3>Поезда</h3>{ul(P["trains"])}<h3>Бюджет на сейчас</h3>{ul(P["budget"])}<h3>Что взять в конце октября</h3>{ul(P["pack"])}<h3>Приложения</h3>{ul(P["apps"])}</section>'
-    gi=f'<section class="gch" id="intro"><p class="draft">✎ {G["draft"]}</p><h2 class="rv">Путеводитель от нас</h2><p>{G["intro"]}</p><h3>Маршрут</h3><p>{G["route"]}</p><h3>Сколько дней</h3><p>{G["days"]}</p><h3>Когда ехать</h3><p>{G["season"]}</p></section>'
+    gi=f'<section class="gch" id="intro"><p class="draft">✎ {G["draft"]}</p><h2 class="rv">Путеводитель от нас</h2><p>{G["intro"]}</p><h3>Маршрут</h3><p>{G["route"]}</p><h3>Сколько дней</h3><p>{G["days"]}</p><h3>Когда ехать</h3><p>{G["season"]}</p><h3>Фото</h3><p>В каждой главе есть блок «Для фото / книжного блога» с атмосферными местами (подробно — на странице <a href="food.html#books">«Еда»</a>).</p>{PALINK}</section>'
     ex=f'<section class="gch" id="extra"><h2 class="rv">Если есть ещё день</h2><p>{G["extra"]}</p></section>'
     page('guide.html','Путеводитель',head('Путеводитель','Рязань, Мещёра, Суздаль и Владимир: наш маршрут для друзей. Черновик до поездки.')+f'<div class="wrap"><div class="gl"><aside class="toc">{toc}</aside><div>{gi}{"".join(chap(c) for c in G["chapters"])}{ex}{pr}</div></div></div>','guide.html')
 print('ok')
