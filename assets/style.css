@@ -95,3 +95,4 @@ blockquote{margin:6px 0;padding:4px 10px;border-left:3px solid var(--a);font-siz
 .sd .chip{text-shadow:none;color:#222;background:#fffe}
 .sd .st{text-shadow:none}
 @media(max-width:700px){.strip{grid-template-columns:repeat(7,170px)}.sd span{font-size:14px}}
+.sd>span{background:linear-gradient(180deg,#0000 0,#0008 28px,#000c 100%);padding-top:22px}
