@@ -30,15 +30,17 @@ PA=D.get('photo_album')
 PACARD=f'<a class="pa rv" href="{PA["url"]}" target="_blank" rel="noopener"><span class="pai">📷</span><span><b>{PA["title"][2:]}</b><br><small>{PA["sub"]}</small></span><span class="paa">→</span></a>' if PA else ''
 PALINK=f'<p class="pal"><a href="{PA["url"]}" target="_blank" rel="noopener">📷 Все фото — в фотопотоке поездки →</a></p>' if PA else ''
 def chips(c): return ''.join(f'<span class="chip{" t" if x.startswith("!") else ""}">{x.lstrip("!")}</span>' for x in c)
+import hashlib as _h
+CSSV=_h.md5(open("assets/style.css","rb").read()).hexdigest()[:8]
 def page(path,title,body,active,needmap=False):
     r='../'*path.count('/')
     nav=''.join(f'<a href="{r}{h}"{" class=on" if h==active else ""}>{t}</a>' for h,t in NAV)
     mp='<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>' if needmap else ''
     data=f'<script>window.TRIP={json.dumps(dict(points=D["points"],colors=D["colors"],food=FOODPTS),ensure_ascii=False)}</script>' if needmap else ''
     html=f'''<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>{title} · Рязань и Владимир, октябрь 2026</title><meta name="description" content="Рязань и Владимир: поездка 23–31 октября 2026 — Рязань, Константиново, Мещёра, Суздаль, Владимир"><meta property="og:title" content="{title} · Рязань и Владимир"><meta property="og:description" content="Поездка 23–31 октября 2026: Рязань, Константиново, Мещёра, Суздаль, Владимир"><link rel="icon" href="{r}favicon.svg"><link rel="apple-touch-icon" sizes="180x180" href="{r}apple-touch-icon.png"><link rel="icon" type="image/png" sizes="192x192" href="{r}icon-192.png"><link rel="manifest" href="{r}site.webmanifest"><meta name="apple-mobile-web-app-title" content="Рязань"><meta name="theme-color" content="#1f3d2b">
+<title>{title} · Рязань и Владимир, октябрь 2026</title><meta name="description" content="Рязань и Владимир: поездка 23–31 октября 2026 — Рязань, Константиново, Мещёра, Суздаль, Владимир"><meta property="og:title" content="{title} · Рязань и Владимир"><meta property="og:description" content="Поездка 23–31 октября 2026: Рязань, Константиново, Мещёра, Суздаль, Владимир"><link rel="icon" href="{r}favicon.svg"><link rel="apple-touch-icon" sizes="180x180" href="{r}apple-touch-icon.png?v=2"><link rel="icon" type="image/png" sizes="192x192" href="{r}icon-192.png"><link rel="manifest" href="{r}site.webmanifest"><meta name="apple-mobile-web-app-title" content="Рязань"><meta name="theme-color" content="#1f3d2b">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-{mp}<link rel="stylesheet" href="{r}assets/style.css"></head><body>
+{mp}<link rel="stylesheet" href="{r}assets/style.css?v={CSSV}"></head><body>
 <nav><b>Рязань · Владимир ’26</b><button class="burger" aria-label="Меню">☰</button><div class="lnk">{nav}</div></nav>
 {body.replace('img/',r+'img/').replace('href="day/','href="'+r+'day/')}
 <footer><div class="wrap">Черновик собран 17.10.2026. Время везде московское.<br><br>Фото: Wikimedia Commons — {D["credits_html"]}</div></footer>
