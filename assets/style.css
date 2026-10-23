@@ -106,3 +106,4 @@ blockquote{margin:6px 0;padding:4px 10px;border-left:3px solid var(--a);font-siz
 @media(max-width:480px){.pass{flex-direction:column}.pass .stub{width:auto;flex-direction:row;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;border-left:0;border-top:2px dashed #f6efe188;padding:14px 18px}
 .pass .stub:before,.pass .stub:after{top:-11px;left:auto;bottom:auto}.pass .stub:before{left:-10px}.pass .stub:after{right:-10px}
 .stub .num{font-size:28px}}
+.route .ln.bus:after{content:"🚌"}
