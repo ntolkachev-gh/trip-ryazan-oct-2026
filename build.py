@@ -51,7 +51,7 @@ days=D['days']
 H=D['hotel']
 FOODPTS=[dict(name=p['name'],addr=p['addr'],lat=p['lat'],lon=p['lon']) for g,L in D['food'] for p in L if p.get('lat')]+[dict(name=b['name'],addr=b['city']+', '+b['addr'],lat=b['lat'],lon=b['lon'],book=True) for b in D.get('book_spots',[])]+[dict(name=H['name']+' (жильё)',addr=H['addr'],lat=H['lat'],lon=H['lon'],hotel=True)]
 HOTEL=f'''<section id="stay"><h2 class="rv">Жильё</h2><div class="box rv"><span class="badge b-o">Почти решено</span><h3 style="color:var(--g);font-size:24px;margin:8px 0 4px">🏨 {H['name']}</h3><p style="margin:0"><b>{H['addr']}</b> · {H['dates']}</p><p style="color:var(--mut)">{H['info']}</p><p><a href="tel:{H['phone'].replace(' ','')}">{H['phone']}</a> · <a href="{H['url']}">Островок</a></p></div></section>'''
-def stt(d): return '<span class="st ok">✓ подтверждено</span>' if d.get('status')=='confirmed' else '<span class="st">черновик</span>'
+def stt(d): return '<span class="st ok">✓ прошёл</span>' if d.get('status')=='done' else '<span class="st ok">✓ подтверждено</span>' if d.get('status')=='confirmed' else '<span class="st">черновик</span>'
 def dlink(d): return f'day/{d["date"][-2:]}.html'
 strip=''.join(f'<a class="sd rv" href="{dlink(d)}" style="background-image:url(img/{d["img"]}.jpg)"><span><b>{d["dt"]}</b>{d["title"]}<br>{stt(d)} {wchip(d["date"])}</span></a>' for d in days)
 tiles=[('tickets.html','🎫','Билеты','Оба поезда куплены'),('plan.html','🗓️','План','Рязань, Константиново, Мещёра, Суздаль, Владимир'),('map.html','🗺️','Карта','Все точки, фильтр по дням'),('checklist.html','✅','Чек-лист','Сборы и полезные ссылки'),('diary.html','📔','Дневник','Заметки и фото из поездки')]
@@ -68,7 +68,7 @@ for i,d in enumerate(days):
     pv=f'<a href="{days[i-1]["date"][-2:]}.html">← {days[i-1]["dt"]}<br><b>{days[i-1]["title"]}</b></a>' if i else '<a href="../plan.html">← Весь план</a>'
     nx=f'<a class="nx" href="{days[i+1]["date"][-2:]}.html">{days[i+1]["dt"]} →<br><b>{days[i+1]["title"]}</b></a>' if i<len(days)-1 else '<a class="nx" href="../tickets.html">Билеты →</a>'
     diary=d.get('diary') or '<div class="diary">Здесь появятся заметки и фото из поездки</div>'
-    page(f'day/{d["date"][-2:]}.html',d['dt']+' · '+d['title'],f'''<header class="phead" style="background-image:url(img/{d["img"]}.jpg)"><div class="in"><div class="kick">День {d["n"]} · {d["dt"]} · {"✓ подтверждено" if d.get("status")=="confirmed" else "черновик"}</div><h1>{d["title"]}</h1></div></header>
+    page(f'day/{d["date"][-2:]}.html',d['dt']+' · '+d['title'],f'''<header class="phead" style="background-image:url(img/{d["img"]}.jpg)"><div class="in"><div class="kick">День {d["n"]} · {d["dt"]} · {"✓ прошёл" if d.get("status")=="done" else "✓ подтверждено" if d.get("status")=="confirmed" else "черновик"}</div><h1>{d["title"]}</h1></div></header>
 <div class="wrap"><section>{wcard(d["date"])}<div class="chips rv">{chips(d["chips"])}</div><div class="box rv"><h2 style="font-size:26px">План</h2><ul>{''.join(f"<li>{x}</li>" for x in d["items"])}</ul></div></section>
 <section><h2 class="rv" style="font-size:28px">Точки дня</h2><div class="mini rv" data-map="{d["n"]}"></div></section>
 <section id="was"><h2 class="rv" style="font-size:28px">Как было</h2>{diary}{PALINK}</section>
