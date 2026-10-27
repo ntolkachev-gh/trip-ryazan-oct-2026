@@ -32,6 +32,22 @@ PALINK=f'<p class="pal"><a href="{PA["url"]}" target="_blank" rel="noopener">�
 def chips(c): return ''.join(f'<span class="chip{" t" if x.startswith("!") else ""}">{x.lstrip("!")}</span>' for x in c)
 import hashlib as _h
 CSSV=_h.md5(open("assets/style.css","rb").read()).hexdigest()[:8]
+import glob as _g
+from PIL import Image as _I
+def gphotos(date):
+    ds={date}|({'2026-10-23'} if date=='2026-10-24' else set())|({'2026-10-31'} if date=='2026-10-30' else set())
+    out=[]
+    for x in sorted(ds):
+        for f in sorted(_g.glob(f'img/diary/{x}/*.jpg')):
+            t=f'img/diary/{x}/t/'+os.path.basename(f)
+            if not os.path.exists(t):
+                os.makedirs(os.path.dirname(t),exist_ok=True);im=_I.open(f);im.thumbnail((600,600));im.save(t,'JPEG',quality=80)
+            out.append((f,t))
+    return out
+def gal(d):
+    P=gphotos(d['date'])
+    if not P: return ''
+    return f'<div class="gal rv">'+''.join(f'<a href="{f}" target="_blank" rel="noopener"><img src="{t}" alt="{d["title"]}" loading="lazy"></a>' for f,t in P)+'</div>'
 def page(path,title,body,active,needmap=False):
     r='../'*path.count('/')
     nav=''.join(f'<a href="{r}{h}"{" class=on" if h==active else ""}>{t}</a>' for h,t in NAV)
@@ -71,7 +87,7 @@ for i,d in enumerate(days):
     page(f'day/{d["date"][-2:]}.html',d['dt']+' · '+d['title'],f'''<header class="phead" style="background-image:url(img/{d["img"]}.jpg)"><div class="in"><div class="kick">День {d["n"]} · {d["dt"]} · {"✓ прошёл" if d.get("status")=="done" else "✓ подтверждено" if d.get("status")=="confirmed" else "план"}</div><h1>{d["title"]}</h1></div></header>
 <div class="wrap"><section>{wcard(d["date"])}<div class="chips rv">{chips(d["chips"])}</div><div class="box rv"><h2 style="font-size:26px">План</h2><ul>{''.join(f"<li>{x}</li>" for x in d["items"])}</ul></div></section>
 <section><h2 class="rv" style="font-size:28px">Точки дня</h2><div class="mini rv" data-map="{d["n"]}"></div></section>
-<section id="was"><h2 class="rv" style="font-size:28px">Как было</h2>{diary}{PALINK}</section>
+<section id="was"><h2 class="rv" style="font-size:28px">Как было</h2>{diary}{gal(d)}{PALINK}</section>
 <div class="pn">{pv}{nx}</div></div>''','plan.html',True)
 flt=''.join(f'<button class="on" data-d="{k}" style="--c:{D["colors"][k]}">{k} · {v}</button>' for k,v in D['legend'].items())+'<button class="on" data-d="food" style="--c:#c8641e">🍴 Еда и жильё</button>'
 page('map.html','Карта',head('Карта','Цвет и номер метки — день поездки. Нажмите на день, чтобы скрыть или показать его точки.')+f'<div class="wrap"><section><div class="flt">{flt}</div><div id="bigmap" data-map="all"></div></section></div>','map.html',True)
@@ -94,7 +110,7 @@ cl=''.join(f'<label><input type="checkbox"><span>{x}</span></label>' for x in D[
 rd=''.join(f'<label><input type="checkbox"><span>{x}</span></label>' for x in D.get('reading',[]))
 lk=''.join(f'<a href="{l["url"]}">{l["title"]}</a>' for l in D['links'])
 page('checklist.html','Чек-лист',head('Чек-лист','Что посмотреть и почитать до поездки. Отметки сохраняются в этом браузере.')+f'<div class="wrap"><section><h2 class="rv">Посмотреть и почитать перед поездкой</h2><div class="cl rv">{rd}</div></section><section><h2 class="rv">Полезные ссылки</h2><div class="links rv">{lk}</div></section></div>','checklist.html')
-dl=''.join(f'<a class="rv" href="{dlink(d)}#was"><div class="th" style="background-image:url(img/{d["img"]}.jpg)"></div><div><b>{d["dt"]} · {d["title"]}</b><br>{stt(d)} <small>{"Есть заметки" if d.get("diary") else "Пока пусто"}</small></div></a>' for d in days)
+dl=''.join(f'<a class="rv" href="{dlink(d)}#was"><div class="th" style="background-image:url(img/{d["img"]}.jpg)"></div><div><b>{d["dt"]} · {d["title"]}</b><br>{stt(d)} <small>{"Есть заметки" if d.get("diary") else "Пока пусто"}{(" · 📷 "+str(len(gphotos(d["date"])))+" фото") if gphotos(d["date"]) else ""}</small></div></a>'+(f'<div class="dg"><h3 class="rv">{d["dt"]} · {d["title"]}</h3>{gal(d)}</div>' if gphotos(d["date"]) else '') for d in days)
 page('diary.html','Дневник',head('Дневник','Заполняется во время и после поездки.')+f'<div class="wrap"><section>{PACARD}</section><section><div class="dl">{dl}</div></section></div>','diary.html')
 page('cuisine.html','Кухня',head('Кухня','Что попробовать на Рязанщине и во Владимирской земле.')+f'<div class="wrap">{intro}<section><a class="rv" href="food.html">← Где поесть</a></section></div>','cuisine.html')
 G=D.get('guide')
